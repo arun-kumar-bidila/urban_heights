@@ -1,12 +1,12 @@
 import type { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
-export interface AdminRequest extends Request {
-  adminId?: string;
+export interface AuthRequest extends Request {
+  userId?: string;
 }
 
-export const adminMiddleware = async (
-  req: AdminRequest,
+export const authMiddleware = async (
+  req: AuthRequest,
   res: Response,
   next: NextFunction,
 ) => {
@@ -18,8 +18,8 @@ export const adminMiddleware = async (
     }
 
     const token = header.split(" ")[1] as string;
-    const result = jwt.verify(token, "secretKey") as { adminId: string };
-    req.adminId = result.adminId;
+    const result = jwt.verify(token, "secretKey") as { userId: string };
+    req.userId = result.userId;
     next();
   } catch (error) {
     return res.status(500).json({ message: "Failed to Verify Token" });

@@ -4,13 +4,19 @@ import {
   profileAdminController,
   registerAdminController,
 } from "./admin.auth.controller.ts";
-import { adminMiddleware } from "../../middlewares/admin.middleware.ts";
+import { authMiddleware } from "../../middlewares/auth.middleware.ts";
+import { registerAdminSchema } from "./admin.auth.validation.ts";
+import { validator } from "../../middlewares/validator.ts";
 
 const router = Router();
 
-router.post("/register", registerAdminController);
+router.post(
+  "/register",
+  validator(registerAdminSchema),
+  registerAdminController,
+);
 router.post("/login", loginAdminController);
-router.get("/profile", adminMiddleware, profileAdminController);
+router.get("/profile", authMiddleware, profileAdminController);
 
 const adminAuthRouter = router;
 

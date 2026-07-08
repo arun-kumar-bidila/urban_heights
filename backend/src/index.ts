@@ -1,11 +1,13 @@
 import express from "express";
 import { connectDatabase } from "./configs/database.ts";
 import router from "./routers/routers.ts";
+import { globalErrorHandler } from "./middlewares/error.ts";
 
 const app = express();
 
 app.use(express.json());
 app.use("/api/v1", router);
+app.use(globalErrorHandler);
 
 app.get("/health", (req, res) => {
   res.status(200).json({

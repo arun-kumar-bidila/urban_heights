@@ -2,34 +2,27 @@ import type { Request, Response } from "express";
 import Admin from "../../models/admin.model.ts";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import type { AdminRequest } from "../../middlewares/admin.middleware.ts";
+import type { AuthRequest } from "../../middlewares/auth.middleware.ts";
+import { catchAsync } from "../../utils/catchAsync.ts";
+import { sendResponse } from "../../utils/sendResponse.ts";
+import { registerAdmin } from "./admin.auth.service.ts";
 
-export const registerAdminController = async (req: Request, res: Response) => {
-  try {
-    const { name, email, password } = req.body as {
-      name: string;
-      email: string;
-      password: string;
-    };
+export const registerAdminController = catchAsync(
+  async (req: Request, res: Response) => {
+    const { name, email, password } = req.body;
 
-    const isExistingUser = await Admin.findOne({ email });
-    if (isExistingUser) {
-      return res.json(400).json({ message: "Admin Already Exists" });
-    }
-
-    const hashPassword = await bcrypt.hash(password, 10);
-
-    const admin = await Admin.create({
+    const result = await registerAdmin({
       name,
       email,
-      password: hashPassword,
+      password,
     });
 
-    return res.status(201).json({ message: "Admin Created Successfully" });
-  } catch (error) {
-    return res.status(500).json({ message: "Admin Registration Failed" });
-  }
-};
+    sendResponse(res, {
+      statusCode: 201,
+      message: result.message,
+    });
+  },
+);
 
 export const loginAdminController = async (req: Request, res: Response) => {
   try {
@@ -52,7 +45,7 @@ export const loginAdminController = async (req: Request, res: Response) => {
 
     const token = jwt.sign(
       {
-        adminId: String(admin._id),
+        userId: String(admin._id),
       },
       "secretKey",
     );
@@ -64,11 +57,11 @@ export const loginAdminController = async (req: Request, res: Response) => {
 };
 
 export const profileAdminController = async (
-  req: AdminRequest,
+  req: AuthRequest,
   res: Response,
 ) => {
   try {
-    const adminId = req.adminId;
+    const adminId = req.userId;
 
     const admin = await Admin.findById(adminId);
 
