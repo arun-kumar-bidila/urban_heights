@@ -84,6 +84,4 @@ class CustomToast {
 
     _isShowing = false;
   }
-
-  // static bool get isShowing => _isShowing;
 }

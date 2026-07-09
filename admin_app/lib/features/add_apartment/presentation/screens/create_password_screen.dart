@@ -1,5 +1,3 @@
-import 'package:admin_app/core/custom_toast.dart';
-import 'package:admin_app/core/enums.dart';
 import 'package:flutter/material.dart';
 
 import 'package:admin_app/config/theme/app_colors.dart';
@@ -93,10 +91,10 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                               onTap: () {
                                 // context.go(AppRoutes.dashboard);
 
-                                CustomToast.show(
-                                  message: "Success with creation",
-                                  type: ToastType.success,
-                                );
+                                // CustomToast.show(
+                                //   message: "Success with creation",
+                                //   type: ToastType.success,
+                                // );
                               },
                             ),
                           ],
