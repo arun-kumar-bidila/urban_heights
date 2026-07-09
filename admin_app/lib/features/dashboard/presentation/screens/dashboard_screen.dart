@@ -24,17 +24,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
             DashboardFeature(
               icon: Icons.person,
-              iconColor: Appcolors.white,
+              iconColor: AppColors.white,
               labelText: "Total Owners",
-              iconBg: Appcolors.lightGreen,
+              iconBg: AppColors.lightGreen,
               valueText: "20",
             ),
             SizedBox(height: 16),
             DashboardFeature(
               icon: Icons.home,
-              iconColor: Appcolors.white,
+              iconColor: AppColors.white,
               labelText: "Total Apartments",
-              iconBg: Appcolors.stealBlue,
+              iconBg: AppColors.stealBlue,
               valueText: "20",
             ),
           ],

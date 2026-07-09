@@ -30,9 +30,9 @@ class _DashboardFeatureState extends State<DashboardFeature> {
         borderRadius: BorderRadius.circular(15),
 
         boxShadow: [
-          BoxShadow(color: Appcolors.black, blurRadius: 1.5, spreadRadius: -1),
+          BoxShadow(color: AppColors.black, blurRadius: 1.5, spreadRadius: -1),
         ],
-        color: Appcolors.white,
+        color: AppColors.white,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +54,7 @@ class _DashboardFeatureState extends State<DashboardFeature> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
-                  color: Appcolors.black,
+                  color: AppColors.black,
                 ),
               ),
             ],
@@ -65,7 +65,7 @@ class _DashboardFeatureState extends State<DashboardFeature> {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
-              color: Appcolors.black,
+              color: AppColors.black,
             ),
           ),
         ],

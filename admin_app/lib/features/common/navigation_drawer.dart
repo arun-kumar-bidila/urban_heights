@@ -15,20 +15,20 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       elevation: 0,
-      backgroundColor: Appcolors.stealBlue,
+      backgroundColor: AppColors.stealBlue,
       child: Column(
         children: [
           SizedBox(height: 50),
           Container(
             padding: EdgeInsets.symmetric(vertical: 30),
             width: double.infinity,
-            color: Appcolors.stealBlue,
+            color: AppColors.stealBlue,
             child: Column(
               children: [
                 Container(
                   padding: EdgeInsets.all(30),
                   decoration: BoxDecoration(
-                    color: Appcolors.white,
+                    color: AppColors.white,
                     shape: BoxShape.circle,
                   ),
                   child: Text(
@@ -36,7 +36,7 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.w700,
-                      color: Appcolors.stealBlue,
+                      color: AppColors.stealBlue,
                     ),
                   ),
                 ),
@@ -45,7 +45,7 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
-                    color: Appcolors.white,
+                    color: AppColors.white,
                   ),
                 ),
                 SizedBox(height: 12),
@@ -54,7 +54,7 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: Appcolors.white,
+                    color: AppColors.white,
                   ),
                 ),
               ],
@@ -64,7 +64,7 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
           Expanded(
             child: Container(
               padding: EdgeInsets.all(16),
-              color: Appcolors.white,
+              color: AppColors.white,
               child: Column(
                 children: [
                   GestureDetector(
@@ -76,14 +76,14 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
                       leading: Icon(
                         Icons.home,
                         size: 30,
-                        color: Appcolors.stealBlue,
+                        color: AppColors.stealBlue,
                       ),
                       title: Text(
                         "Dashboard Overview",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
-                          color: Appcolors.black,
+                          color: AppColors.black,
                         ),
                       ),
                     ),
@@ -97,14 +97,14 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
                       leading: Icon(
                         Icons.add,
                         size: 30,
-                        color: Appcolors.stealBlue,
+                        color: AppColors.stealBlue,
                       ),
                       title: Text(
-                        "Add New Owner",
+                        "Add Apartment",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
-                          color: Appcolors.black,
+                          color: AppColors.black,
                         ),
                       ),
                     ),
@@ -118,14 +118,14 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
                       leading: Icon(
                         Icons.delete,
                         size: 30,
-                        color: Appcolors.stealBlue,
+                        color: AppColors.stealBlue,
                       ),
                       title: Text(
-                        "Delete Owner",
+                        "Delete Apartment",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
-                          color: Appcolors.black,
+                          color: AppColors.black,
                         ),
                       ),
                     ),
@@ -139,14 +139,14 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
                       leading: Icon(
                         Icons.logout,
                         size: 30,
-                        color: Appcolors.stealBlue,
+                        color: AppColors.stealBlue,
                       ),
                       title: Text(
                         "LogOut Profile",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
-                          color: Appcolors.black,
+                          color: AppColors.black,
                         ),
                       ),
                     ),

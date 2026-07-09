@@ -7,6 +7,7 @@ class CommonTextfield extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final bool isPassword;
+  final int minLines;
 
   const CommonTextfield({
     super.key,
@@ -15,6 +16,7 @@ class CommonTextfield extends StatefulWidget {
     required this.hintText,
     required this.controller,
     required this.isPassword,
+    this.minLines = 1,
   });
 
   @override
@@ -22,7 +24,10 @@ class CommonTextfield extends StatefulWidget {
 }
 
 class _CommonTextfieldState extends State<CommonTextfield> {
-  final _border = InputBorder.none;
+  final _border = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(12),
+    borderSide: BorderSide(color: AppColors.black, width: 1),
+  );
   bool obscureText = true;
 
   @override
@@ -37,7 +42,7 @@ class _CommonTextfieldState extends State<CommonTextfield> {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w400,
-              color: Appcolors.black,
+              color: AppColors.black,
             ),
             children: [
               TextSpan(
@@ -45,61 +50,59 @@ class _CommonTextfieldState extends State<CommonTextfield> {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: Appcolors.red,
+                  color: AppColors.red,
                 ),
               ),
             ],
           ),
         ),
 
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(width: 1, color: Appcolors.black),
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(widget.prefixIcon, size: 20, color: Appcolors.grey),
-              SizedBox(width: 10),
-              Expanded(
-                child: TextFormField(
-                  cursorColor: Appcolors.stealBlue,
-                  obscureText: obscureText,
-                  controller: widget.controller,
-                  decoration: InputDecoration(
-                    contentPadding: .zero,
-                    enabledBorder: _border,
-                    focusedBorder: _border,
-                    errorBorder: _border,
-                    border: _border,
-                    hintText: widget.hintText,
-                    hintStyle: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Appcolors.grey,
+        TextFormField(
+          cursorColor: AppColors.stealBlue,
+          obscureText: widget.isPassword ? obscureText : false,
+          controller: widget.controller,
+          decoration: InputDecoration(
+            prefixIcon: Icon(
+              widget.prefixIcon,
+              size: 20,
+              color: AppColors.grey,
+            ),
+            suffixIcon: widget.isPassword
+                ? GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        obscureText = !obscureText;
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Icon(
+                        obscureText
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility_outlined,
+                        color: AppColors.grey,
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              if (widget.isPassword) ...[
-                SizedBox(width: 10),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      obscureText = !obscureText;
-                    });
-                  },
-                  child: Icon(
-                    obscureText ? Icons.visibility_off : Icons.visibility,
-                    size: 20,
-                    color: Appcolors.grey,
-                  ),
-                ),
-              ],
-            ],
+                  )
+                : null,
+            contentPadding: .zero,
+            enabledBorder: _border,
+            focusedBorder: _border,
+            errorBorder: _border,
+            border: _border,
+            hintText: widget.hintText,
+            hintStyle: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: AppColors.grey,
+            ),
           ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "*Required";
+            }
+            return null;
+          },
         ),
       ],
     );

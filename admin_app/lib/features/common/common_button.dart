@@ -24,7 +24,7 @@ class _CommonButtonState extends State<CommonButton> {
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: Appcolors.stealBlue,
+          color: AppColors.stealBlue,
         ),
         child: Center(
           child: Text(
@@ -32,7 +32,7 @@ class _CommonButtonState extends State<CommonButton> {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w700,
-              color: Appcolors.white,
+              color: AppColors.white,
             ),
           ),
         ),
