@@ -1,6 +1,8 @@
 import 'package:admin_app/config/routes/app_routes.dart';
 import 'package:admin_app/config/theme/app_colors.dart';
+import 'package:admin_app/features/auth/presentation/bloc/fetch_admin/fetch_admin_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomNavigationDrawer extends StatefulWidget {
@@ -19,46 +21,53 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
       child: Column(
         children: [
           SizedBox(height: 50),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 30),
-            width: double.infinity,
-            color: AppColors.stealBlue,
-            child: Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(30),
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    shape: BoxShape.circle,
+          BlocBuilder<FetchAdminBloc, FetchAdminState>(
+            builder: (context, state) {
+              if (state is FetchAdminSuccess) {
+                return Container(
+                  padding: EdgeInsets.symmetric(vertical: 30),
+                  width: double.infinity,
+                  color: AppColors.stealBlue,
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(30),
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Text(
+                          state.adminEntity.name[0].toUpperCase(),
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.stealBlue,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        state.adminEntity.name,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.white,
+                        ),
+                      ),
+                      SizedBox(height: 12),
+                      Text(
+                        state.adminEntity.email,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ],
                   ),
-                  child: Text(
-                    "A",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.stealBlue,
-                    ),
-                  ),
-                ),
-                Text(
-                  "Admin",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.white,
-                  ),
-                ),
-                SizedBox(height: 12),
-                Text(
-                  "admin@gmail.com",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.white,
-                  ),
-                ),
-              ],
-            ),
+                );
+              }
+              return Container(height: 100, color: AppColors.stealBlue);
+            },
           ),
 
           Expanded(

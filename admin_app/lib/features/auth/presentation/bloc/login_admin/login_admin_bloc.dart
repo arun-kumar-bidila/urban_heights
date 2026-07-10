@@ -13,6 +13,7 @@ class LoginAdminBloc extends Bloc<LoginAdminEvent, LoginAdminState> {
   }
 
   void loginAdmin(LoginAdmin event, Emitter<LoginAdminState> emit) async {
+    emit(LoginAdminLoading());
     try {
       final response = await loginAdminUseCase(
         LoginAdminUseCaseParams(

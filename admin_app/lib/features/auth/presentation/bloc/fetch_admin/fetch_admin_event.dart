@@ -5,7 +5,4 @@ sealed class FetchAdminEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class FetchAdmin extends FetchAdminEvent {
-  final FetchAdminUseCaseParams fetchAdminUseCaseParams;
-  FetchAdmin({required this.fetchAdminUseCaseParams});
-}
+final class FetchAdmin extends FetchAdminEvent {}

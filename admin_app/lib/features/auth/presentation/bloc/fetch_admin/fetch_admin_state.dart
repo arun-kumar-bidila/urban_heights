@@ -14,4 +14,8 @@ final class FetchAdminFailure extends FetchAdminState {
   FetchAdminFailure({required this.failure});
 }
 
-final class FetchAdminSuccess extends FetchAdminState {}
+final class FetchAdminSuccess extends FetchAdminState {
+  final AdminEntity adminEntity;
+
+  FetchAdminSuccess({required this.adminEntity});
+}

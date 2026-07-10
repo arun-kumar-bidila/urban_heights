@@ -1,5 +1,5 @@
 import 'package:admin_app/config/routes/app_routes.dart';
-import 'package:admin_app/features/auth/domain/use_case/fetch_admin_use_case.dart';
+import 'package:admin_app/config/theme/app_colors.dart';
 import 'package:admin_app/features/auth/presentation/bloc/fetch_admin/fetch_admin_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,11 +30,7 @@ class _AuthGatewayState extends State<AuthGateway> {
       }
     }
     if (mounted) {
-      context.read<FetchAdminBloc>().add(
-        FetchAdmin(
-          fetchAdminUseCaseParams: FetchAdminUseCaseParams(token: token!),
-        ),
-      );
+      context.read<FetchAdminBloc>().add(FetchAdmin());
     }
   }
 
@@ -48,7 +44,11 @@ class _AuthGatewayState extends State<AuthGateway> {
           context.go(AppRoutes.dashboard);
         }
       },
-      child: Scaffold(body: CircularProgressIndicator()),
+      child: Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(color: AppColors.stealBlue),
+        ),
+      ),
     );
   }
 }

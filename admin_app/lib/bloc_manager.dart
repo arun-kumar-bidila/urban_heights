@@ -1,3 +1,4 @@
+import 'package:admin_app/features/auth/presentation/bloc/fetch_admin/fetch_admin_bloc.dart';
 import 'package:admin_app/features/auth/presentation/bloc/login_admin/login_admin_bloc.dart';
 import 'package:admin_app/singletons/init_dependencies.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class BlocManager {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (BuildContext context) => sl<LoginAdminBloc>()),
+        BlocProvider(create: (BuildContext context) => sl<FetchAdminBloc>()),
       ],
       child: child,
     );
