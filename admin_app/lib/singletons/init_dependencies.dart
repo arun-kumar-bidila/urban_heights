@@ -11,10 +11,13 @@ import 'package:get_it/get_it.dart';
 final sl = GetIt.instance;
 void initDependencies() async {
   try {
+    /* ***************************  FEATURED ************************/
     await initDataSources(sl: sl);
     await initRepository(sl: sl);
     await initUseCase(sl: sl);
     await initBlocService(sl: sl);
+
+    /* ***************************  CORE ************************/
     final dio = Dio(
       BaseOptions(
         baseUrl: Env.baseUrl,

@@ -85,8 +85,6 @@ class _AddOwnerCodeScreenState extends State<AddOwnerCodeScreen> {
                                 buttonName: "Skip",
                                 inActiveColor: true,
                                 onTap: () {
-                                  // if (formKey.currentState?.validate() ??
-                                  //     false) {
                                   context.go(
                                     AppRoutes.createPassword,
                                     extra: {
@@ -98,26 +96,25 @@ class _AddOwnerCodeScreenState extends State<AddOwnerCodeScreen> {
                                           .trim(),
                                     },
                                   );
-                                  // }
                                 },
                               ),
                               CommonButton(
                                 buttonName: "Continue",
                                 onTap: () {
-                                  // if (formKey.currentState?.validate() ??
-                                  //     false) {
-                                  context.go(
-                                    AppRoutes.createPassword,
-                                    extra: {
-                                      "apartmentName": widget.apartmentName,
-                                      "ownerName": widget.ownerName,
-                                      "mobile": widget.mobile,
-                                      "address": widget.address,
-                                      "ownerCode": _ownerCodeController.text
-                                          .trim(),
-                                    },
-                                  );
-                                  // }
+                                  if (formKey.currentState?.validate() ??
+                                      false) {
+                                    context.go(
+                                      AppRoutes.createPassword,
+                                      extra: {
+                                        "apartmentName": widget.apartmentName,
+                                        "ownerName": widget.ownerName,
+                                        "mobile": widget.mobile,
+                                        "address": widget.address,
+                                        "ownerCode": _ownerCodeController.text
+                                            .trim(),
+                                      },
+                                    );
+                                  }
                                 },
                               ),
                             ],

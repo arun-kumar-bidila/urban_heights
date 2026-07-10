@@ -1,8 +1,8 @@
 import 'package:admin_app/config/routes/app_routes.dart';
-import 'package:admin_app/features/add_apartment/presentation/screens/add_apartment_screen.dart';
-import 'package:admin_app/features/add_apartment/presentation/screens/add_owner_code_screen.dart';
-import 'package:admin_app/features/add_apartment/presentation/screens/apartment_creation_success_screen.dart';
-import 'package:admin_app/features/add_apartment/presentation/screens/create_password_screen.dart';
+import 'package:admin_app/features/apartment/presentation/screens/add_apartment_screen.dart';
+import 'package:admin_app/features/apartment/presentation/screens/add_owner_code_screen.dart';
+import 'package:admin_app/features/apartment/presentation/screens/apartment_creation_success_screen.dart';
+import 'package:admin_app/features/apartment/presentation/screens/create_password_screen.dart';
 import 'package:admin_app/features/auth/presentation/screens/auth_gateway.dart';
 import 'package:admin_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:admin_app/features/dashboard/presentation/screens/dashboard_screen.dart';
@@ -60,7 +60,10 @@ class GoRouterConfig {
       ),
       GoRoute(
         path: AppRoutes.apartmentCreationSuccessScreen,
-        builder: (context, state) => ApartmentCreationSuccessScreen(),
+        builder: (context, state) {
+          final password = state.extra as String;
+          return ApartmentCreationSuccessScreen(password: password);
+        },
       ),
     ],
   );

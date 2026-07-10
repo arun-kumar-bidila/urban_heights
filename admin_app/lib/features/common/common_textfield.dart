@@ -26,7 +26,7 @@ class CommonTextfield extends StatefulWidget {
 class _CommonTextfieldState extends State<CommonTextfield> {
   final _border = OutlineInputBorder(
     borderRadius: BorderRadius.circular(12),
-    borderSide: BorderSide(color: AppColors.black, width: 1),
+    borderSide: BorderSide(color: AppColors.grey, width: 1),
   );
   bool obscureText = true;
 
