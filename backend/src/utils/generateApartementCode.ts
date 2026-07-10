@@ -1,6 +1,6 @@
 import crypto from "crypto";
 
-export const generateApartmentId = (): string => {
+export const generateApartmentCode = (): string => {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
   let id = "URB-";

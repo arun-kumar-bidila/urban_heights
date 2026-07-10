@@ -10,21 +10,31 @@ import type { AuthRequest } from "../../middlewares/auth.middleware.ts";
 
 export const createApartmentController = catchAsync(
   async (req: Request, res: Response) => {
-    const { apartmentName, address, ownerMobile, ownerName, password } =
-      req.body;
+    const {
+      apartmentName,
+      address,
+      ownerMobile,
+      ownerName,
+      password,
+      ownerCode,
+    } = req.body;
 
     const result = await createApartment({
       apartmentName,
       address,
       ownerMobile,
       ownerName,
+      ownerCode,
       password,
     });
 
     sendResponse(res, {
       statusCode: 201,
       message: result.message,
-      data: { apartmentId: result.apartmentId },
+      data: {
+        apartmentCode: result.apartmentCode,
+        ownerCode: result.ownerCode,
+      },
     });
   },
 );

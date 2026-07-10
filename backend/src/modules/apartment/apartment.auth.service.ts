@@ -2,13 +2,16 @@ import Apartment from "../../models/apartment.model.ts";
 import bcrypt from "bcrypt";
 import AppError from "../../utils/appError.ts";
 import jwt from "jsonwebtoken";
-import { generateApartmentId } from "../../utils/generateApartementId.ts";
+import { generateApartmentCode } from "../../utils/generateApartementCode.ts";
+import { generateOwnerCode } from "../../utils/generateOwnerCode.ts";
+import Owner from "../../models/owner.model.ts";
 
 export interface CreateApartmentRequest {
   apartmentName: string;
   address: string;
   ownerName: string;
   ownerMobile: string;
+  ownerCode: string;
   password: string;
 }
 
@@ -18,36 +21,55 @@ export interface LoginApartmentRequest {
 }
 
 export interface SafeApartment {
-  apartmentId: string;
+  apartmentCode: string;
   apartmentName: string;
   address: string;
   ownerName: string;
   ownerMobile: string;
+  ownerCode: string;
 }
 export const createApartment = async ({
   apartmentName,
   address,
   ownerName,
   ownerMobile,
+  ownerCode,
   password,
 }: CreateApartmentRequest): Promise<{
   message: string;
-  apartmentId: string;
+  apartmentCode: string;
+  ownerCode: string;
 }> => {
   const hashedPassword = await bcrypt.hash(password, 10);
-  const generatedId = generateApartmentId();
+  const generatedId = generateApartmentCode();
+  if (!ownerCode || ownerCode.length == 0) {
+    ownerCode = generateOwnerCode();
+  }
+
+  const owner = await Owner.create({
+    ownerName,
+    ownerMobile,
+    ownerCode,
+  });
+
+  if (!owner) {
+    throw new AppError("Owner Creation Failed", 400);
+  }
+
   const response = await Apartment.create({
-    apartmentId: generatedId,
+    apartmentCode: generatedId,
     apartmentName,
     address,
     ownerName,
     ownerMobile,
+    ownerCode,
     password: hashedPassword,
   });
 
   return {
     message: "Apartment Created Successfully",
-    apartmentId: response.apartmentId,
+    apartmentCode: response.apartmentCode,
+    ownerCode: response.ownerCode,
   };
 };
 

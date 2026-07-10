@@ -9,6 +9,6 @@ export const globalErrorHandler = (
   let error = err;
   error.statusCode ||= 500;
   error.message ||= "Something Went Wrong";
-
+  console.log(error.message);
   return res.status(error.statusCode).json({ message: error.message });
 };

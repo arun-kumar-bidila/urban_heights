@@ -22,6 +22,7 @@ export const createApartmentSchema = Joi.object({
     "string.empty": "OwnerMobile is required",
     "any.required": "OwnerMobile is required",
   }),
+  ownerCode: Joi.string().trim().optional().allow(""),
 
   password: Joi.string().trim().min(4).required().messages({
     "string.min": "Password must be at least 8 characters",
@@ -31,7 +32,7 @@ export const createApartmentSchema = Joi.object({
 }).strict();
 
 export const loginApartmentSchema = Joi.object({
-  apartmentId: Joi.string().trim().required().messages({
+  apartmentCode: Joi.string().trim().required().messages({
     "string.empty": "ApartmentId is required",
     "any.required": "ApartmentId is required",
   }),

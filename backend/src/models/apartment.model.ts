@@ -2,11 +2,12 @@ import { Schema, Model, Document } from "mongoose";
 import mongoose from "mongoose";
 
 export interface IApartment {
-  apartmentId: string;
+  apartmentCode: string;
   apartmentName: string;
   address: string;
   ownerName: string;
   ownerMobile: string;
+  ownerCode: string;
   password: string;
   createdAt: Date;
   updatedAt: Date;
@@ -14,7 +15,7 @@ export interface IApartment {
 
 const ApartmentSchema: Schema<IApartment> = new Schema<IApartment>(
   {
-    apartmentId: {
+    apartmentCode: {
       type: String,
       required: true,
       trim: true,
@@ -36,6 +37,11 @@ const ApartmentSchema: Schema<IApartment> = new Schema<IApartment>(
       trim: true,
     },
     ownerMobile: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    ownerCode: {
       type: String,
       required: true,
       trim: true,
