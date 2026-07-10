@@ -15,9 +15,9 @@ class ApartmentModel extends ApartmentEntity {
   factory ApartmentModel.fromJson(Map<String, dynamic> json) => ApartmentModel(
     apartmentCode: json["apartmentCode"] ?? "",
     apartmentName: json["apartmentName"] ?? "",
-    ownerName: json["apartmentName"] ?? "",
+    ownerName: json["ownerName"] ?? "",
     ownerCode: json["ownerCode"] ?? "",
-    address: json["ownerCode"] ?? "",
+    address: json["address"] ?? "",
     password: json["password"] ?? "",
     createdAt: json["password"] ?? "",
     ownerMobile: json["ownerMobile"] ?? "",

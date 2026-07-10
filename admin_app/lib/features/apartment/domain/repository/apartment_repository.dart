@@ -7,4 +7,6 @@ abstract interface class ApartmentRepository {
   Future<Either<Failure, ApartmentEntity>> addApartment({
     required AddApartmentUseCaseParams params,
   });
+
+  Future<Either<Failure, List<ApartmentEntity>>> fetchAllApartments();
 }

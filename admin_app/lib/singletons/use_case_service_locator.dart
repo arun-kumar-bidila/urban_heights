@@ -1,4 +1,5 @@
 import 'package:admin_app/features/apartment/domain/use_case/add_apartment_use_case.dart';
+import 'package:admin_app/features/apartment/domain/use_case/fetch_all_apartments_use_case.dart';
 
 import 'package:admin_app/features/auth/domain/use_case/fetch_admin_use_case.dart';
 import 'package:admin_app/features/auth/domain/use_case/login_admin_use_case.dart';
@@ -20,5 +21,8 @@ Future<void> initUseCase({required GetIt sl}) async {
   );
   sl.registerFactory<DashboardSummaryUseCase>(
     () => DashboardSummaryUseCase(dashboardRepository: sl()),
+  );
+  sl.registerFactory<FetchAllApartmentsUseCase>(
+    () => FetchAllApartmentsUseCase(apartmentRepository: sl()),
   );
 }

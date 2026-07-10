@@ -17,4 +17,11 @@ class ApartmentRepositoryImpl implements ApartmentRepository {
 
     return result.fold((failure) => Left(failure), (success) => Right(success));
   }
+
+  @override
+  Future<Either<Failure, List<ApartmentEntity>>> fetchAllApartments() async {
+    final result = await apartmentDataSource.fetchAllApartments();
+
+    return result.fold((failure) => Left(failure), (success) => Right(success));
+  }
 }
