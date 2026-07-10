@@ -1,8 +1,10 @@
 import type { Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync.ts";
 import {
+  allApartments,
   createApartment,
   fetchApartment,
+  fetchSummary,
   loginApartment,
 } from "./apartment.auth.service.ts";
 import { sendResponse } from "../../utils/sendResponse.ts";
@@ -65,6 +67,34 @@ export const fetchApartmentController = catchAsync(
       statusCode: 200,
       message: result.message,
       data: result.apartment,
+    });
+  },
+);
+
+export const fetchSummaryController = catchAsync(
+  async (req: AuthRequest, res: Response) => {
+    const result = await fetchSummary();
+
+    sendResponse(res, {
+      message: result.message,
+      statusCode: 200,
+      data: {
+        totalApartments: result.totalApartments,
+        totalOwners: result.totalOwners,
+      },
+    });
+  },
+);
+
+export const allApartmentsController = catchAsync(
+  async (req: AuthRequest, res: Response) => {
+    const result = await allApartments();
+
+    sendResponse(res, {
+      message: result.message,
+      data: {
+        apartments: result.apartments,
+      },
     });
   },
 );

@@ -107,3 +107,30 @@ export const fetchApartment = async (
     apartment: apartment,
   };
 };
+
+export const fetchSummary = async (): Promise<{
+  message: string;
+  totalApartments: number;
+  totalOwners: number;
+}> => {
+  const totalApartments = await Apartment.find({});
+  const totalOwners = await Owner.find({});
+
+  return {
+    message: "Summary",
+    totalApartments: totalApartments.length,
+    totalOwners: totalOwners.length,
+  };
+};
+
+export const allApartments = async (): Promise<{
+  message: string;
+  apartments: SafeApartment[];
+}> => {
+  const apartments = await Apartment.find({});
+
+  return {
+    message: "Apartments Fetched Successfully",
+    apartments: apartments,
+  };
+};

@@ -3,6 +3,8 @@ import {
   createApartmentController,
   fetchApartmentController,
   loginApartmentController,
+  fetchSummaryController,
+  allApartmentsController,
 } from "./apartment.auth.controller.ts";
 import { validator } from "../../middlewares/validator.ts";
 import {
@@ -24,6 +26,10 @@ router.post(
   loginApartmentController,
 );
 router.get("/profile", authMiddleware, fetchApartmentController);
+
+router.get("/summary", authMiddleware, fetchSummaryController);
+
+router.get("/apartments", authMiddleware, allApartmentsController);
 
 const apartmentRouter = router;
 export default apartmentRouter;
