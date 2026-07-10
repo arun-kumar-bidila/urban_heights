@@ -92,8 +92,8 @@ class _CommonTextfieldState extends State<CommonTextfield> {
             border: _border,
             hintText: widget.hintText,
             hintStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
               color: AppColors.grey,
             ),
           ),

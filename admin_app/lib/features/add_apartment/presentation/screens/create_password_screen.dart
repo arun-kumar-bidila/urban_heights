@@ -1,21 +1,25 @@
+import 'package:admin_app/config/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
 import 'package:admin_app/config/theme/app_colors.dart';
 import 'package:admin_app/features/common/common_button.dart';
 import 'package:admin_app/features/common/common_textfield.dart';
 import 'package:admin_app/features/common/navigation_drawer.dart';
+import 'package:go_router/go_router.dart';
 
 class CreatePasswordScreen extends StatefulWidget {
   final String apartmentName;
   final String ownerName;
   final String mobile;
   final String address;
+  final String? ownerCode;
   const CreatePasswordScreen({
     super.key,
     required this.apartmentName,
     required this.ownerName,
     required this.address,
     required this.mobile,
+    this.ownerCode,
   });
 
   @override
@@ -89,7 +93,9 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                             CommonButton(
                               buttonName: "Create",
                               onTap: () {
-                                // context.go(AppRoutes.dashboard);
+                                context.go(
+                                  AppRoutes.apartmentCreationSuccessScreen,
+                                );
 
                                 // CustomToast.show(
                                 //   message: "Success with creation",

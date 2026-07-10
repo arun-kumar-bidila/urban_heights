@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class CommonButton extends StatefulWidget {
   final String buttonName;
   final VoidCallback onTap;
+  final bool inActiveColor;
   const CommonButton({
     super.key,
     required this.buttonName,
     required this.onTap,
+    this.inActiveColor = false,
   });
 
   @override
@@ -24,7 +26,10 @@ class _CommonButtonState extends State<CommonButton> {
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: AppColors.stealBlue,
+          color: widget.inActiveColor ? AppColors.white : AppColors.stealBlue,
+          border: widget.inActiveColor
+              ? Border.all(width: 1, color: AppColors.stealBlue)
+              : null,
         ),
         child: Center(
           child: Text(
@@ -32,7 +37,9 @@ class _CommonButtonState extends State<CommonButton> {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w700,
-              color: AppColors.white,
+              color: widget.inActiveColor
+                  ? AppColors.stealBlue
+                  : AppColors.white,
             ),
           ),
         ),

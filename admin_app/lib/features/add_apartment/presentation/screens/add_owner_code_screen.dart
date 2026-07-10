@@ -6,22 +6,26 @@ import 'package:admin_app/features/common/navigation_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class AddApartmentScreen extends StatefulWidget {
-  const AddApartmentScreen({super.key});
+class AddOwnerCodeScreen extends StatefulWidget {
+  final String apartmentName;
+  final String ownerName;
+  final String mobile;
+  final String address;
+  const AddOwnerCodeScreen({
+    super.key,
+    required this.apartmentName,
+    required this.ownerName,
+    required this.address,
+    required this.mobile,
+  });
 
   @override
-  State<AddApartmentScreen> createState() => _AddApartmentScreenState();
+  State<AddOwnerCodeScreen> createState() => _AddOwnerCodeScreenState();
 }
 
-class _AddApartmentScreenState extends State<AddApartmentScreen> {
-  final TextEditingController _apartmentNameController =
-      TextEditingController();
-
-  final TextEditingController _mobileNumberController = TextEditingController();
-  final TextEditingController _ownerNameController = TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
+class _AddOwnerCodeScreenState extends State<AddOwnerCodeScreen> {
+  final TextEditingController _ownerCodeController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +66,7 @@ class _AddApartmentScreenState extends State<AddApartmentScreen> {
                             children: [
                               // TODO ADD LOGO + APP NAME
                               Text(
-                                "Create Apartment",
+                                "Enter Owner Code",
                                 style: TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.w700,
@@ -71,50 +75,46 @@ class _AddApartmentScreenState extends State<AddApartmentScreen> {
                               ),
 
                               CommonTextfield(
-                                label: "Apartment Name",
-                                prefixIcon: Icons.apartment,
-                                hintText: "Shri apartments",
-                                controller: _apartmentNameController,
-                                isPassword: false,
-                              ),
-                              CommonTextfield(
-                                label: "Owner Name",
-                                prefixIcon: Icons.person,
-                                hintText: "Rao",
-                                controller: _ownerNameController,
-                                isPassword: false,
-                              ),
-                              CommonTextfield(
-                                label: "Owner Mobile Number",
-                                prefixIcon: Icons.phone,
-                                hintText: "9876543210",
-                                controller: _mobileNumberController,
-                                isPassword: false,
-                              ),
-                              CommonTextfield(
-                                label: "Address",
+                                label: "Existing Owner Code",
                                 prefixIcon: Icons.location_on,
-                                hintText: "5-73 Gachibowli",
-                                controller: _addressController,
+                                hintText: "OWN-****",
+                                controller: _ownerCodeController,
                                 isPassword: false,
                               ),
-
+                              CommonButton(
+                                buttonName: "Skip",
+                                inActiveColor: true,
+                                onTap: () {
+                                  // if (formKey.currentState?.validate() ??
+                                  //     false) {
+                                  context.go(
+                                    AppRoutes.createPassword,
+                                    extra: {
+                                      "apartmentName": widget.apartmentName,
+                                      "ownerName": widget.ownerName,
+                                      "mobile": widget.mobile,
+                                      "address": widget.address,
+                                      "ownerCode": _ownerCodeController.text
+                                          .trim(),
+                                    },
+                                  );
+                                  // }
+                                },
+                              ),
                               CommonButton(
                                 buttonName: "Continue",
                                 onTap: () {
                                   // if (formKey.currentState?.validate() ??
                                   //     false) {
                                   context.go(
-                                    AppRoutes.ownerCodeScreen,
+                                    AppRoutes.createPassword,
                                     extra: {
-                                      "apartmentName": _apartmentNameController
-                                          .text
+                                      "apartmentName": widget.apartmentName,
+                                      "ownerName": widget.ownerName,
+                                      "mobile": widget.mobile,
+                                      "address": widget.address,
+                                      "ownerCode": _ownerCodeController.text
                                           .trim(),
-                                      "ownerName": _ownerNameController.text
-                                          .trim(),
-                                      "mobile": _mobileNumberController.text
-                                          .trim(),
-                                      "address": _addressController.text.trim(),
                                     },
                                   );
                                   // }
