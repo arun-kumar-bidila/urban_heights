@@ -1,8 +1,10 @@
 import 'package:admin_app/config/routes/app_routes.dart';
 import 'package:admin_app/config/theme/app_colors.dart';
 import 'package:admin_app/features/auth/presentation/bloc/fetch_admin/fetch_admin_bloc.dart';
+import 'package:admin_app/singletons/init_dependencies.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomNavigationDrawer extends StatefulWidget {
@@ -140,9 +142,17 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      context.pop();
-                      context.go(AppRoutes.addNew);
+                    onTap: () async {
+                      final storage = sl<FlutterSecureStorage>();
+
+                      await storage.delete(key: "token");
+
+                      if (context.mounted) {
+                        context.read<FetchAdminBloc>().add(
+                          ResetAdminBlocEvent(),
+                        );
+                        context.go(AppRoutes.login);
+                      }
                     },
                     child: ListTile(
                       leading: Icon(

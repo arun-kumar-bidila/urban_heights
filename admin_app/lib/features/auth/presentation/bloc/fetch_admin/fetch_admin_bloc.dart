@@ -14,6 +14,7 @@ class FetchAdminBloc extends Bloc<FetchAdminEvent, FetchAdminState> {
   FetchAdminBloc({required this.fetchAdminUseCase})
     : super(FetchAdminInitial()) {
     on<FetchAdmin>(fetchAdmin);
+    on<ResetAdminBlocEvent>(resetAdminBloc);
   }
 
   void fetchAdmin(FetchAdmin event, Emitter<FetchAdminState> emit) async {
@@ -28,5 +29,12 @@ class FetchAdminBloc extends Bloc<FetchAdminEvent, FetchAdminState> {
     } catch (e) {
       emit(FetchAdminFailure(failure: Failure()));
     }
+  }
+
+  void resetAdminBloc(
+    ResetAdminBlocEvent event,
+    Emitter<FetchAdminState> emit,
+  ) {
+    emit(FetchAdminInitial());
   }
 }

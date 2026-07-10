@@ -6,3 +6,5 @@ sealed class FetchAdminEvent extends Equatable {
 }
 
 final class FetchAdmin extends FetchAdminEvent {}
+
+final class ResetAdminBlocEvent extends FetchAdminEvent {}
