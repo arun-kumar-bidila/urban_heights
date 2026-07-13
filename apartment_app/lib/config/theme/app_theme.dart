@@ -5,10 +5,14 @@ class AppTheme {
   static final ThemeData appTheme = ThemeData(
     brightness: Brightness.light,
     fontFamily: "Montserrat",
-    scaffoldBackgroundColor: AppColors.white,
+    scaffoldBackgroundColor: Color(0xFFf8f9fb),
     appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.stealBlue,
-      iconTheme: IconThemeData(color: AppColors.white),
+      elevation: 5,
+      backgroundColor: AppColors.white,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.black26,
+      foregroundColor: AppColors.stealBlue,
+      iconTheme: IconThemeData(color: AppColors.stealBlue),
     ),
   );
 }

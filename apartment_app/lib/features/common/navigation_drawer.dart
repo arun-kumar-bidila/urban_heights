@@ -116,7 +116,7 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
                                   ),
                                   SizedBox(width: 8),
                                   Icon(
-                                    Icons.check_circle_outline_rounded,
+                                    Icons.check_circle,
                                     color: AppColors.emerald,
                                     size: 16,
                                   ),
@@ -164,7 +164,7 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
                   GestureDetector(
                     onTap: () {
                       context.pop();
-                      context.go(AppRoutes.addNew);
+                      context.go(AppRoutes.profile);
                     },
                     child: ListTile(
                       leading: Icon(
@@ -185,7 +185,7 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
                   GestureDetector(
                     onTap: () {
                       context.pop();
-                      context.go(AppRoutes.addNew);
+                      context.go(AppRoutes.profile);
                     },
                     child: ListTile(
                       leading: Icon(
@@ -206,7 +206,7 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
                   GestureDetector(
                     onTap: () {
                       context.pop();
-                      context.go(AppRoutes.addNew);
+                      context.go(AppRoutes.profile);
                     },
                     child: ListTile(
                       leading: Icon(
@@ -227,7 +227,7 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
                   GestureDetector(
                     onTap: () {
                       context.pop();
-                      context.go(AppRoutes.addNew);
+                      context.go(AppRoutes.profile);
                     },
                     child: ListTile(
                       leading: Icon(
@@ -248,7 +248,7 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
                   GestureDetector(
                     onTap: () {
                       context.pop();
-                      context.go(AppRoutes.addNew);
+                      context.go(AppRoutes.profile);
                     },
                     child: ListTile(
                       leading: Icon(

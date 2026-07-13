@@ -9,3 +9,12 @@ void logger(
 }) {
   dev.log(message, level: level.value, name: name);
 }
+
+String capitalize(String value) {
+  return value
+      .split(' ')
+      .map((word) {
+        return '${word[0].toUpperCase()}${word.substring(1).toLowerCase()}';
+      })
+      .join(' ');
+}

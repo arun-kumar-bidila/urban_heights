@@ -10,4 +10,11 @@ class AppColors {
   static const emerald = Color(0xFF22C55E);
   static const Color lightBlue = Color(0xFF00bcff);
   static const Color mediumBlue = Color(0xFF215c82);
+
+  // Gradients
+  static const Gradient mainGradient = LinearGradient(
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+    colors: [AppColors.stealBlue, AppColors.mediumBlue],
+  );
 }
