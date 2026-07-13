@@ -28,7 +28,7 @@ class FetchApartmentBloc
 
       response.fold(
         (failure) => emit(FetchApartmentFailure(failure: failure)),
-        (success) => emit(FetchApartmentSuccess(adminEntity: success)),
+        (success) => emit(FetchApartmentSuccess(apartmentEntity: success)),
       );
     } catch (e) {
       emit(FetchApartmentFailure(failure: Failure()));

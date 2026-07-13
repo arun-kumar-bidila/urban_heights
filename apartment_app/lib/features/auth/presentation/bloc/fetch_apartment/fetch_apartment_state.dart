@@ -15,7 +15,7 @@ final class FetchApartmentFailure extends FetchApartmentState {
 }
 
 final class FetchApartmentSuccess extends FetchApartmentState {
-  final ApartmentEntity adminEntity;
+  final ApartmentEntity apartmentEntity;
 
-  FetchApartmentSuccess({required this.adminEntity});
+  FetchApartmentSuccess({required this.apartmentEntity});
 }
