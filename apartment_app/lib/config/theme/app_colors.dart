@@ -7,7 +7,10 @@ class AppColors {
   static const Color grey = Colors.grey;
   static const Color red = Colors.red;
   static const Color lightGreen = Colors.lightGreen;
-  static const emerald = Color(0xFF22C55E);
+  static const Color emerald = Color(0xFF22C55E);
+  static const Color paleGreen = Color(0xFFd1fae4);
+  static const Color paleYellow = Color(0xFFfff3c6);
+  static const Color paleRed = Color(0xFFffe2e2);
   static const Color lightBlue = Color(0xFF00bcff);
   static const Color mediumBlue = Color(0xFF215c82);
   static const Color lightWhite = Color(0xFFa2abb7);

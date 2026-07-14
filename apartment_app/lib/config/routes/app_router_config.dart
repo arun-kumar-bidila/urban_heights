@@ -3,6 +3,8 @@ import 'package:apartment_app/features/auth/presentation/screens/auth_gateway.da
 import 'package:apartment_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:apartment_app/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:apartment_app/features/profile/presentation/screens/profile_screen.dart';
+import 'package:apartment_app/features/rooms/presentation/screens/rooms_screen.dart';
+import 'package:apartment_app/features/rooms/presentation/screens/specific_room_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -29,6 +31,14 @@ class GoRouterConfig {
       GoRoute(
         path: AppRoutes.profile,
         builder: (context, state) => ProfileScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.rooms,
+        builder: (context, state) => RoomsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.specificRoomScreen,
+        builder: (context, state) => SpecificRoomScreen(),
       ),
     ],
   );
