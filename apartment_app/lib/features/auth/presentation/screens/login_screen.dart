@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(16),
 
                     boxShadow: [
                       BoxShadow(

@@ -7,10 +7,10 @@ class AppTheme {
     fontFamily: "Montserrat",
     scaffoldBackgroundColor: Color(0xFFf8f9fb),
     appBarTheme: AppBarTheme(
-      elevation: 5,
+      elevation: 1,
       backgroundColor: AppColors.white,
       surfaceTintColor: Colors.transparent,
-      shadowColor: Colors.black26,
+      shadowColor: Colors.black,
       foregroundColor: AppColors.stealBlue,
       iconTheme: IconThemeData(color: AppColors.stealBlue),
     ),
