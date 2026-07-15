@@ -69,7 +69,7 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w700,
-                                    color: AppColors.black,
+                                    color: AppColors.mediumBlue,
                                   ),
                                 ),
                               ],
@@ -140,8 +140,8 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
                           "Navy gradient hero card with owner avatar, name, verified badge, and 3 quick stats (rooms / occupied / collected)",
                           style: TextStyle(
                             fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.grey,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.black,
                           ),
                         ),
                       ],

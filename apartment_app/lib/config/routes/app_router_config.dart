@@ -2,6 +2,7 @@ import 'package:apartment_app/config/routes/app_routes.dart';
 import 'package:apartment_app/features/announcements/presentation/screens/announcements_screen.dart';
 import 'package:apartment_app/features/auth/presentation/screens/auth_gateway.dart';
 import 'package:apartment_app/features/auth/presentation/screens/login_screen.dart';
+import 'package:apartment_app/features/complaints/presentation/screens/complaints_screen.dart';
 import 'package:apartment_app/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:apartment_app/features/profile/presentation/screens/profile_screen.dart';
 import 'package:apartment_app/features/rooms/presentation/screens/rooms_screen.dart';
@@ -44,6 +45,10 @@ class GoRouterConfig {
       GoRoute(
         path: AppRoutes.announcements,
         builder: (context, state) => AnnouncementsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.complaints,
+        builder: (context, state) => ComplaintsScreen(),
       ),
     ],
   );
