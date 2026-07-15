@@ -1,4 +1,5 @@
 import 'package:apartment_app/config/routes/app_routes.dart';
+import 'package:apartment_app/features/announcements/presentation/screens/announcements_screen.dart';
 import 'package:apartment_app/features/auth/presentation/screens/auth_gateway.dart';
 import 'package:apartment_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:apartment_app/features/dashboard/presentation/screens/dashboard_screen.dart';
@@ -39,6 +40,10 @@ class GoRouterConfig {
       GoRoute(
         path: AppRoutes.specificRoomScreen,
         builder: (context, state) => SpecificRoomScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.announcements,
+        builder: (context, state) => AnnouncementsScreen(),
       ),
     ],
   );

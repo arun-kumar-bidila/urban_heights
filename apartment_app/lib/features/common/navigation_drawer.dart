@@ -227,7 +227,7 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
                   GestureDetector(
                     onTap: () {
                       context.pop();
-                      context.go(AppRoutes.profile);
+                      context.go(AppRoutes.announcements);
                     },
                     child: ListTile(
                       leading: Icon(
