@@ -60,7 +60,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                             Row(
                               children: [
                                 Text(
-                                  state.apartmentEntity.apartmentCode,
+                                  state.apartmentEntity.address,
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,

@@ -1,5 +1,6 @@
 import 'package:apartment_app/config/theme/app_colors.dart';
 import 'package:apartment_app/features/common/navigation_drawer.dart';
+import 'package:apartment_app/features/profile/presentation/widgets/apartment_code.dart';
 import 'package:apartment_app/features/profile/presentation/widgets/owner_info.dart';
 import 'package:apartment_app/features/profile/presentation/widgets/profile_header.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       drawer: CustomNavigationDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(spacing: 20, children: [ProfileHeader(), OwnerInfo()]),
+        child: Column(
+          spacing: 20,
+          children: [ProfileHeader(), ApartmentCodeWidget(), OwnerInfo()],
+        ),
       ),
     );
   }
