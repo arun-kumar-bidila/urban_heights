@@ -3,7 +3,7 @@ class AnnouncementEntity {
   final String description;
   final String datePosted;
   final bool pinned;
-
+  final String announcementId;
   final String apartmentId;
 
   AnnouncementEntity({
@@ -12,5 +12,6 @@ class AnnouncementEntity {
     required this.datePosted,
     required this.pinned,
     required this.apartmentId,
+    required this.announcementId,
   });
 }

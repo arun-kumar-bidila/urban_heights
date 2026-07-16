@@ -30,7 +30,7 @@ class AnnouncementDataSourceImpl implements AnnouncementDataSource {
     required String announcementId,
   }) async {
     try {
-      logger("${Env.baseUrl}${Env.deleteAnnouncement}");
+      logger("${Env.baseUrl}${Env.deleteAnnouncement}$announcementId");
 
       String? token = await storage.read(key: "token");
 
@@ -112,7 +112,7 @@ class AnnouncementDataSourceImpl implements AnnouncementDataSource {
     required bool pinned,
   }) async {
     try {
-      logger("${Env.baseUrl}${Env.updateAnnouncement}");
+      logger("${Env.baseUrl}${Env.updateAnnouncement}$announcementId");
       String? token = await storage.read(key: "token");
 
       if (token == null || token.isEmpty) {

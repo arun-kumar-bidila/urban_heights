@@ -1,4 +1,6 @@
+import 'package:apartment_app/features/announcements/presentation/bloc/delete_announcement/delete_announcement_bloc.dart';
 import 'package:apartment_app/features/announcements/presentation/bloc/fetch_announcements/fetch_announcements_bloc.dart';
+import 'package:apartment_app/features/announcements/presentation/bloc/update_announcement/update_announcement_bloc.dart';
 import 'package:apartment_app/features/auth/presentation/bloc/fetch_apartment/fetch_apartment_bloc.dart';
 import 'package:apartment_app/features/auth/presentation/bloc/login_apartment/login_apartment_bloc.dart';
 import 'package:apartment_app/singletons/init_dependencies.dart';
@@ -24,12 +26,12 @@ class BlocManager {
         BlocProvider(
           create: (BuildContext context) => sl<FetchAnnouncementsBloc>(),
         ),
-        // BlocProvider(
-        //   create: (BuildContext context) => sl<DashboardSummaryBloc>(),
-        // ),
-        // BlocProvider(
-        //   create: (BuildContext context) => sl<FetchAllApartmentsBloc>(),
-        // ),
+        BlocProvider(
+          create: (BuildContext context) => sl<DeleteAnnouncementBloc>(),
+        ),
+        BlocProvider(
+          create: (BuildContext context) => sl<UpdateAnnouncementBloc>(),
+        ),
       ],
       child: child,
     );

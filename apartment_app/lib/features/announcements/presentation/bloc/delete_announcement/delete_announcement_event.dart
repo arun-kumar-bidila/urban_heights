@@ -6,3 +6,9 @@ sealed class DeleteAnnouncementEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
+
+final class DeleteAnnouncement extends DeleteAnnouncementEvent {
+  final DeleteAnnouncementUseCaseParams deleteAnnouncementUseCaseParams;
+
+  const DeleteAnnouncement({required this.deleteAnnouncementUseCaseParams});
+}

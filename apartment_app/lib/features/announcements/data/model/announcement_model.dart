@@ -7,6 +7,7 @@ class AnnouncementModel extends AnnouncementEntity {
     required super.datePosted,
     required super.pinned,
     required super.apartmentId,
+    required super.announcementId,
   });
 
   factory AnnouncementModel.fromJson(Map<String, dynamic> json) =>
@@ -16,5 +17,6 @@ class AnnouncementModel extends AnnouncementEntity {
         datePosted: json["datePosted"] ?? "",
         pinned: json["pinned"] ?? false,
         apartmentId: json["apartmentId"] ?? "",
+        announcementId: json["announcementId"] ?? "",
       );
 }

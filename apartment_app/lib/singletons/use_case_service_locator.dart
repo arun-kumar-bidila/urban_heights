@@ -1,4 +1,6 @@
+import 'package:apartment_app/features/announcements/domain/use_case/delete_announcement_use_case.dart';
 import 'package:apartment_app/features/announcements/domain/use_case/fetch_announcements_use_case.dart';
+import 'package:apartment_app/features/announcements/domain/use_case/update_announcement_use_case.dart';
 
 import 'package:apartment_app/features/auth/domain/use_case/fetch_apartment_use_case.dart';
 import 'package:apartment_app/features/auth/domain/use_case/login_apartment_use_case.dart';
@@ -13,9 +15,15 @@ Future<void> initUseCase({required GetIt sl}) async {
     () => FetchApartmentUseCase(authRepository: sl()),
   );
 
-  /* ***************************  APARTMENT ************************/
+  /* ***************************  ANNOUNCEMENT ************************/
 
   sl.registerFactory<FetchAnnouncementsUseCase>(
     () => FetchAnnouncementsUseCase(announcementRepository: sl()),
+  );
+  sl.registerFactory<DeleteAnnouncementUseCase>(
+    () => DeleteAnnouncementUseCase(announcementRepository: sl()),
+  );
+  sl.registerFactory<UpdateAnnouncementUseCase>(
+    () => UpdateAnnouncementUseCase(announcementRepository: sl()),
   );
 }
