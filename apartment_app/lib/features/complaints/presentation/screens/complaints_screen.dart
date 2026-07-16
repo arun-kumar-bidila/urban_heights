@@ -150,7 +150,7 @@ class _ComplaintsScreenState extends State<ComplaintsScreen> {
                               child: Row(
                                 children: [
                                   Icon(
-                                    Icons.warning,
+                                    Icons.warning_amber_outlined,
                                     size: 12,
                                     color: AppColors.red,
                                   ),
@@ -159,7 +159,7 @@ class _ComplaintsScreenState extends State<ComplaintsScreen> {
                                     "open",
                                     style: TextStyle(
                                       fontSize: 12,
-                                      fontWeight: FontWeight.w700,
+                                      fontWeight: FontWeight.w600,
                                       color: AppColors.red,
                                     ),
                                   ),
@@ -171,7 +171,7 @@ class _ComplaintsScreenState extends State<ComplaintsScreen> {
                               "02 July",
                               style: TextStyle(
                                 fontSize: 12,
-                                fontWeight: FontWeight.w700,
+                                fontWeight: FontWeight.w600,
                                 color: AppColors.grey,
                               ),
                             ),

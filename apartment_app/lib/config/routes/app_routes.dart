@@ -8,4 +8,5 @@ class AppRoutes {
   static final String specificRoomScreen = "/specificRoomScreen";
   static final String announcements = "/announcements";
   static final String complaints = "/complaints";
+  static final String rentStatus = "/rentStatus";
 }

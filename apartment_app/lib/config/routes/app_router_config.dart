@@ -5,6 +5,7 @@ import 'package:apartment_app/features/auth/presentation/screens/login_screen.da
 import 'package:apartment_app/features/complaints/presentation/screens/complaints_screen.dart';
 import 'package:apartment_app/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:apartment_app/features/profile/presentation/screens/profile_screen.dart';
+import 'package:apartment_app/features/rent_status/presentation/screens/rent_status_screen.dart';
 import 'package:apartment_app/features/rooms/presentation/screens/rooms_screen.dart';
 import 'package:apartment_app/features/rooms/presentation/screens/specific_room_screen.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +50,10 @@ class GoRouterConfig {
       GoRoute(
         path: AppRoutes.complaints,
         builder: (context, state) => ComplaintsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.rentStatus,
+        builder: (context, state) => RentStatusScreen(),
       ),
     ],
   );

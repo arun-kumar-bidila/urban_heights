@@ -14,6 +14,7 @@ class AppColors {
   static const Color lightBlue = Color(0xFF00bcff);
   static const Color mediumBlue = Color(0xFF215c82);
   static const Color lightWhite = Color(0xFFa2abb7);
+  static const Color orange = Colors.deepOrangeAccent;
 
   // Gradients
   static const Gradient mainGradient = LinearGradient(

@@ -135,7 +135,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 12),
                           Row(
                             children: [
                               Card(
@@ -156,6 +156,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
                                     style: TextStyle(
                                       color: Color(0xFF007a55),
                                       fontWeight: FontWeight.w700,
+                                      fontSize: 12,
                                     ),
                                   ),
                                 ),
