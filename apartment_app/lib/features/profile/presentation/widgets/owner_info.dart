@@ -64,7 +64,7 @@ class OwnerInfo extends StatelessWidget {
                             capitalize(state.apartmentEntity.ownerName),
                             style: TextStyle(
                               fontSize: 14,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w600,
                               color: AppColors.black,
                             ),
                           ),
@@ -93,7 +93,7 @@ class OwnerInfo extends StatelessWidget {
                             state.apartmentEntity.ownerMobile,
                             style: TextStyle(
                               fontSize: 14,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w600,
                               color: AppColors.black,
                             ),
                           ),
@@ -122,7 +122,7 @@ class OwnerInfo extends StatelessWidget {
                             state.apartmentEntity.ownerCode,
                             style: TextStyle(
                               fontSize: 14,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w600,
                               color: AppColors.black,
                             ),
                           ),

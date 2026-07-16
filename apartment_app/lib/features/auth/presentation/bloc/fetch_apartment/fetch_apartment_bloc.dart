@@ -15,7 +15,7 @@ class FetchApartmentBloc
   FetchApartmentBloc({required this.fetchAdminUseCase})
     : super(FetchApartmentInitial()) {
     on<FetchApartment>(fetchAdmin);
-    on<ResetAdminBlocEvent>(resetAdminBloc);
+    on<ResetApartmentBlocEvent>(resetAdminBloc);
   }
 
   void fetchAdmin(
@@ -36,7 +36,7 @@ class FetchApartmentBloc
   }
 
   void resetAdminBloc(
-    ResetAdminBlocEvent event,
+    ResetApartmentBlocEvent event,
     Emitter<FetchApartmentState> emit,
   ) {
     emit(FetchApartmentInitial());

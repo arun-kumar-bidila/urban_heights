@@ -7,4 +7,4 @@ sealed class FetchApartmentEvent extends Equatable {
 
 final class FetchApartment extends FetchApartmentEvent {}
 
-final class ResetAdminBlocEvent extends FetchApartmentEvent {}
+final class ResetApartmentBlocEvent extends FetchApartmentEvent {}

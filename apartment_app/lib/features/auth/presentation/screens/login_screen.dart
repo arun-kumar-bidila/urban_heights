@@ -4,6 +4,7 @@ import 'package:apartment_app/core/custom_toast.dart';
 import 'package:apartment_app/core/enums.dart';
 import 'package:apartment_app/core/global_loader.dart';
 import 'package:apartment_app/features/auth/domain/use_case/login_apartment_use_case.dart';
+import 'package:apartment_app/features/auth/presentation/bloc/fetch_apartment/fetch_apartment_bloc.dart';
 import 'package:apartment_app/features/auth/presentation/bloc/login_apartment/login_apartment_bloc.dart';
 import 'package:apartment_app/features/common/common_button.dart';
 import 'package:apartment_app/features/common/common_textfield.dart';
@@ -27,11 +28,9 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: BlocListener<LoginApartmentBloc, LoginApartmentState>(
+        child: BlocListener<FetchApartmentBloc, FetchApartmentState>(
           listener: (context, state) {
-            if (state is LoginApartmentLoading) {
-              GlobalLoader.show();
-            } else if (state is LoginApartmentFailure) {
+            if (state is FetchApartmentFailure) {
               if (GlobalLoader.isShowing) {
                 GlobalLoader.hide();
               }
@@ -39,82 +38,100 @@ class _LoginScreenState extends State<LoginScreen> {
                 message: state.failure.message,
                 type: ToastType.success,
               );
-            } else if (state is LoginApartmentSuccess) {
+            } else if (state is FetchApartmentSuccess) {
               if (GlobalLoader.isShowing) {
                 GlobalLoader.hide();
               }
               context.go(AppRoutes.dashboard);
             }
           },
-          child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Image.asset("assets/icons/urban_heights.png", height: 200),
-                // SizedBox(height: 50),
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
+          child: BlocListener<LoginApartmentBloc, LoginApartmentState>(
+            listener: (context, state) {
+              if (state is LoginApartmentLoading) {
+                GlobalLoader.show();
+              } else if (state is LoginApartmentFailure) {
+                if (GlobalLoader.isShowing) {
+                  GlobalLoader.hide();
+                }
+                CustomToast.show(
+                  message: state.failure.message,
+                  type: ToastType.success,
+                );
+              } else if (state is LoginApartmentSuccess) {
+                context.read<FetchApartmentBloc>().add(FetchApartment());
+              }
+            },
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Image.asset("assets/icons/urban_heights.png", height: 200),
+                  // SizedBox(height: 50),
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
 
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.black,
-                        blurRadius: 1.5,
-                        spreadRadius: -1,
-                      ),
-                    ],
-                    color: AppColors.white,
-                  ),
-                  child: Column(
-                    spacing: 24,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // TODO ADD LOGO + APP NAME
-                      Text(
-                        "Login Here",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700,
+                      boxShadow: [
+                        BoxShadow(
                           color: AppColors.black,
+                          blurRadius: 1.5,
+                          spreadRadius: -1,
                         ),
-                      ),
-                      CommonTextfield(
-                        label: "Apartment Code",
-                        prefixIcon: Icons.mail,
-                        hintText: "example@gmail.com",
-                        controller: _apartmentCode,
-                        isPassword: false,
-                      ),
-                      CommonTextfield(
-                        label: "Password",
-                        prefixIcon: Icons.lock,
-                        hintText: "********",
-                        controller: _password,
-                        isPassword: true,
-                      ),
-                      CommonButton(
-                        buttonName: "Login",
-                        onTap: () {
-                          if (formKey.currentState?.validate() ?? false) {
-                            context.read<LoginApartmentBloc>().add(
-                              LoginApartment(
-                                loginApartmentUseCaseParams:
-                                    LoginApartmentUseCaseParams(
-                                      apartmentCode: _apartmentCode.text.trim(),
-                                      password: _password.text.trim(),
-                                    ),
-                              ),
-                            );
-                          }
-                        },
-                      ),
-                    ],
+                      ],
+                      color: AppColors.white,
+                    ),
+                    child: Column(
+                      spacing: 24,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // TODO ADD LOGO + APP NAME
+                        Text(
+                          "Login Here",
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.black,
+                          ),
+                        ),
+                        CommonTextfield(
+                          label: "Apartment Code",
+                          prefixIcon: Icons.mail,
+                          hintText: "example@gmail.com",
+                          controller: _apartmentCode,
+                          isPassword: false,
+                        ),
+                        CommonTextfield(
+                          label: "Password",
+                          prefixIcon: Icons.lock,
+                          hintText: "********",
+                          controller: _password,
+                          isPassword: true,
+                        ),
+                        CommonButton(
+                          buttonName: "Login",
+                          onTap: () {
+                            if (formKey.currentState?.validate() ?? false) {
+                              context.read<LoginApartmentBloc>().add(
+                                LoginApartment(
+                                  loginApartmentUseCaseParams:
+                                      LoginApartmentUseCaseParams(
+                                        apartmentCode: _apartmentCode.text
+                                            .trim(),
+                                        password: _password.text.trim(),
+                                      ),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
