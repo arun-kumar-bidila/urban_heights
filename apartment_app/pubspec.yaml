@@ -37,16 +37,19 @@ dependencies:
   go_router: ^17.3.0
   fpdart: ^1.2.0
   envied: ^1.3.8
-  build_runner: ^2.15.1
+
   flutter_secure_storage: ^10.3.1
   dio: ^5.10.0
   flutter_bloc: ^9.1.1
   get_it: ^9.2.1
   equatable: ^2.1.0
+  intl: ^0.20.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  envied_generator: ^1.3.8
+  build_runner: ^2.15.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

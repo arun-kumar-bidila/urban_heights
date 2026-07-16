@@ -1,3 +1,4 @@
+import 'package:apartment_app/features/announcements/presentation/bloc/fetch_announcements/fetch_announcements_bloc.dart';
 import 'package:apartment_app/features/auth/presentation/bloc/fetch_apartment/fetch_apartment_bloc.dart';
 import 'package:apartment_app/features/auth/presentation/bloc/login_apartment/login_apartment_bloc.dart';
 import 'package:apartment_app/singletons/init_dependencies.dart';
@@ -11,7 +12,7 @@ class BlocManager {
   }) {
     return MultiBlocProvider(
       providers: [
-        /* ***************************  ADMIN ************************/
+        /* ***************************  APARTMENT ************************/
         BlocProvider(
           create: (BuildContext context) => sl<LoginApartmentBloc>(),
         ),
@@ -19,8 +20,10 @@ class BlocManager {
           create: (BuildContext context) => sl<FetchApartmentBloc>(),
         ),
 
-        /* ***************************  APARTMENT ************************/
-        // BlocProvider(create: (BuildContext context) => sl<AddApartmentBloc>()),
+        /* ***************************  ANNOUNCEMENT ************************/
+        BlocProvider(
+          create: (BuildContext context) => sl<FetchAnnouncementsBloc>(),
+        ),
         // BlocProvider(
         //   create: (BuildContext context) => sl<DashboardSummaryBloc>(),
         // ),

@@ -1,6 +1,7 @@
 import 'dart:developer' as dev;
 
 import 'package:apartment_app/core/enums.dart';
+import 'package:intl/intl.dart';
 
 void logger(
   String message, {
@@ -17,4 +18,11 @@ String capitalize(String value) {
         return '${word[0].toUpperCase()}${word.substring(1).toLowerCase()}';
       })
       .join(' ');
+}
+
+String formattedDate(String date) {
+  final parsedDate = DateTime.parse(date).toLocal();
+
+  final formatted = DateFormat('dd MMM yyyy').format(parsedDate);
+  return formatted;
 }
