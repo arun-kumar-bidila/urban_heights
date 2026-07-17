@@ -4,6 +4,7 @@ export interface IRoom {
   roomNumber: string;
   roomType: string;
   rent: number;
+  rentStatus: boolean;
   apartmentId: mongoose.Types.ObjectId;
   vacant: boolean;
   createdAt: Date;
@@ -35,6 +36,10 @@ const roomSchema: Schema<IRoom> = new Schema(
     vacant: {
       type: Boolean,
       default: true,
+    },
+    rentStatus: {
+      type: Boolean,
+      default: false,
     },
   },
   {

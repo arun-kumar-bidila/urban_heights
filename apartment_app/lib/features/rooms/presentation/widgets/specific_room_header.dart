@@ -1,8 +1,11 @@
 import 'package:apartment_app/config/theme/app_colors.dart';
+import 'package:apartment_app/core/utils.dart';
+import 'package:apartment_app/features/rooms/domain/entity/room_entity.dart';
 import 'package:flutter/material.dart';
 
 class SpecificRoomHeader extends StatelessWidget {
-  const SpecificRoomHeader({super.key});
+  final RoomEntity room;
+  const SpecificRoomHeader({super.key, required this.room});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +50,7 @@ class SpecificRoomHeader extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Arun Kumar",
+                        capitalize(room.tenant!.fullName),
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
@@ -64,7 +67,8 @@ class SpecificRoomHeader extends StatelessWidget {
                           ),
                           SizedBox(width: 2),
                           Text(
-                            "A-101 • 2BHK",
+                            "${room.roomNumber.toUpperCase()} • ${room.roomType.toUpperCase()}",
+
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
@@ -89,7 +93,7 @@ class SpecificRoomHeader extends StatelessWidget {
                   Column(
                     children: [
                       Text(
-                        "₹18,000",
+                        formatRent(room.rent),
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -142,7 +146,9 @@ class SpecificRoomHeader extends StatelessWidget {
                     children: [
                       Card(
                         elevation: 0,
-                        color: AppColors.paleGreen,
+                        color: room.rentStatus
+                            ? AppColors.paleGreen
+                            : AppColors.paleRed,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadiusGeometry.circular(16),
                         ),
@@ -152,10 +158,12 @@ class SpecificRoomHeader extends StatelessWidget {
                             horizontal: 8,
                           ),
                           child: Text(
-                            "paid",
+                            room.rentStatus ? "paid" : "unpaid",
                             style: TextStyle(
                               fontSize: 12,
-                              color: Color(0xFF007a55),
+                              color: room.rentStatus
+                                  ? Color(0xFF007a55)
+                                  : AppColors.red,
                               fontWeight: FontWeight.w700,
                             ),
                           ),

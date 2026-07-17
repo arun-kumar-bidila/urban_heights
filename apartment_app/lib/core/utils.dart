@@ -26,3 +26,13 @@ String formattedDate(String date) {
   final formatted = DateFormat('dd MMM yyyy').format(parsedDate);
   return formatted;
 }
+
+String formatRent(num amount) {
+  final formatter = NumberFormat.currency(
+    locale: 'en_IN',
+    symbol: '₹',
+    decimalDigits: 0,
+  );
+
+  return formatter.format(amount);
+}

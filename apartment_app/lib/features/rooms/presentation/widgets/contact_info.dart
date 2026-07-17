@@ -1,8 +1,11 @@
 import 'package:apartment_app/config/theme/app_colors.dart';
+import 'package:apartment_app/core/utils.dart';
+import 'package:apartment_app/features/rooms/domain/entity/room_entity.dart';
 import 'package:flutter/material.dart';
 
 class ContactInfo extends StatelessWidget {
-  const ContactInfo({super.key});
+  final RoomEntity room;
+  const ContactInfo({super.key, required this.room});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +51,7 @@ class ContactInfo extends StatelessWidget {
                     Icon(Icons.phone, size: 20, color: AppColors.lightBlue),
                     SizedBox(width: 12),
                     Text(
-                      "+91 79893 72523",
+                      "+91 ${room.tenant!.mobile}",
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -70,7 +73,7 @@ class ContactInfo extends StatelessWidget {
                     Icon(Icons.mail, size: 20, color: AppColors.lightBlue),
                     SizedBox(width: 12),
                     Text(
-                      "arunkumarbidi@gmail.com",
+                      room.tenant!.email,
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -96,7 +99,7 @@ class ContactInfo extends StatelessWidget {
                     ),
                     SizedBox(width: 12),
                     Text(
-                      "Since 1 Mar 2022",
+                      "Since ${formattedDate(room.tenant!.createdAt)}",
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,

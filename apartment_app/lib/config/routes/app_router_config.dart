@@ -6,6 +6,7 @@ import 'package:apartment_app/features/complaints/presentation/screens/complaint
 import 'package:apartment_app/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:apartment_app/features/profile/presentation/screens/profile_screen.dart';
 import 'package:apartment_app/features/rent_status/presentation/screens/rent_status_screen.dart';
+import 'package:apartment_app/features/rooms/domain/entity/room_entity.dart';
 import 'package:apartment_app/features/rooms/presentation/screens/rooms_screen.dart';
 import 'package:apartment_app/features/rooms/presentation/screens/specific_room_screen.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,10 @@ class GoRouterConfig {
       ),
       GoRoute(
         path: AppRoutes.specificRoomScreen,
-        builder: (context, state) => SpecificRoomScreen(),
+        builder: (context, state) {
+          final RoomEntity room = state.extra as RoomEntity;
+          return SpecificRoomScreen(room: room);
+        },
       ),
       GoRoute(
         path: AppRoutes.announcements,

@@ -1,4 +1,5 @@
 import 'package:apartment_app/config/theme/app_colors.dart';
+import 'package:apartment_app/features/rooms/domain/entity/room_entity.dart';
 import 'package:apartment_app/features/rooms/presentation/widgets/contact_info.dart';
 import 'package:apartment_app/features/rooms/presentation/widgets/family_info.dart';
 import 'package:apartment_app/features/rooms/presentation/widgets/specific_room_header.dart';
@@ -6,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class SpecificRoomScreen extends StatefulWidget {
-  const SpecificRoomScreen({super.key});
+  final RoomEntity room;
+  const SpecificRoomScreen({super.key, required this.room});
 
   @override
   State<SpecificRoomScreen> createState() => _SpecificRoomScreenState();
@@ -45,8 +47,8 @@ class _SpecificRoomScreenState extends State<SpecificRoomScreen> {
                   ],
                 ),
               ),
-              SpecificRoomHeader(),
-              ContactInfo(),
+              SpecificRoomHeader(room: widget.room),
+              ContactInfo(room: widget.room),
               SizedBox(height: 16),
               FamilyInfo(),
             ],
