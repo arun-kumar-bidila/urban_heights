@@ -6,6 +6,7 @@ class AppRoutes {
   static final String rooms = "/rooms";
   static final String authGateway = "/authGateway";
   static final String specificRoomScreen = "/specificRoomScreen";
+  static final String addTenantScreen = "/addTenant";
   static final String announcements = "/announcements";
   static final String complaints = "/complaints";
   static final String rentStatus = "/rentStatus";

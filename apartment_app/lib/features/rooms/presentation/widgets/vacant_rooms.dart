@@ -1,5 +1,6 @@
 import 'package:apartment_app/config/routes/app_routes.dart';
 import 'package:apartment_app/config/theme/app_colors.dart';
+import 'package:apartment_app/core/utils.dart';
 import 'package:apartment_app/features/rooms/domain/entity/room_entity.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class VacantRooms extends StatelessWidget {
         final room = vacantRooms[index];
         return GestureDetector(
           onTap: () {
-            // context.push(AppRoutes.specificRoomScreen);
+            context.push(AppRoutes.addTenantScreen, extra: room);
           },
           child: Container(
             margin: EdgeInsets.only(bottom: 16),
@@ -126,7 +127,7 @@ class VacantRooms extends StatelessWidget {
                     ),
                     SizedBox(width: 6),
                     Text(
-                      "${room.rent} /month",
+                      "${formatRent(room.rent)} /month",
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,

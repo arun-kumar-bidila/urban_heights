@@ -2,12 +2,17 @@ import 'package:apartment_app/core/failure.dart';
 import 'package:apartment_app/core/utils.dart';
 import 'package:apartment_app/env/env.dart';
 import 'package:apartment_app/features/rooms/data/model/room_model.dart';
+import 'package:apartment_app/features/rooms/domain/use_case/add_tenant_use_case.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fpdart/fpdart.dart';
 
 abstract interface class RoomDataSource {
   Future<Either<Failure, List<RoomModel>>> fetchRooms();
+
+  Future<Either<Failure, bool>> addTenant({
+    required AddTenantUseCaseParams params,
+  });
 }
 
 class RoomDataSourceImpl implements RoomDataSource {
@@ -33,6 +38,51 @@ class RoomDataSourceImpl implements RoomDataSource {
       if (response.statusCode == 200 || response.statusCode == 201) {
         List rooms = response.data["data"];
         return Right(rooms.map((room) => RoomModel.fromJson(room)).toList());
+      } else {
+        return Left(Failure());
+      }
+    } on DioException catch (e) {
+      if (e.response == null) {
+        return Left(Failure(message: "Internet error occurred"));
+      }
+      if ((e.response?.statusCode ?? 503) >= 500) {
+        return Left(Failure(message: "Server Error occurred"));
+      }
+      String failureMessage =
+          e.response?.data['message'] ?? 'Unknown error occurred';
+
+      return Left(Failure(message: failureMessage));
+    } catch (e) {
+      logger(e.toString());
+      return Left(Failure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> addTenant({
+    required AddTenantUseCaseParams params,
+  }) async {
+    try {
+      logger("${Env.baseUrl}${Env.addTenant}");
+
+      String? token = await storage.read(key: "token");
+
+      if (token == null || token.isEmpty) {
+        return Left(Failure(message: "Authentication Failed. Log In Again"));
+      }
+      final response = await dio.post(
+        Env.addTenant,
+        options: Options(headers: {"Authorization": "Bearer $token"}),
+        data: {
+          "fullName": params.fullName,
+          "mobile": "+91${params.mobile}",
+          "email": params.email,
+          "roomId": params.roomId,
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return Right(true);
       } else {
         return Left(Failure());
       }

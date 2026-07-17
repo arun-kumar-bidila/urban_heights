@@ -65,7 +65,7 @@ class _CommonTextfieldState extends State<CommonTextfield> {
             prefixIcon: Icon(
               widget.prefixIcon,
               size: 20,
-              color: AppColors.grey,
+              color: AppColors.lightBlue,
             ),
             suffixIcon: widget.isPassword
                 ? GestureDetector(

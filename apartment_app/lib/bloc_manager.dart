@@ -3,6 +3,7 @@ import 'package:apartment_app/features/announcements/presentation/bloc/fetch_ann
 import 'package:apartment_app/features/announcements/presentation/bloc/update_announcement/update_announcement_bloc.dart';
 import 'package:apartment_app/features/auth/presentation/bloc/fetch_apartment/fetch_apartment_bloc.dart';
 import 'package:apartment_app/features/auth/presentation/bloc/login_apartment/login_apartment_bloc.dart';
+import 'package:apartment_app/features/rooms/presentation/bloc/add_tenant/add_tenant_bloc.dart';
 import 'package:apartment_app/features/rooms/presentation/bloc/fetch_rooms/fetch_rooms_bloc.dart';
 import 'package:apartment_app/singletons/init_dependencies.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,7 @@ class BlocManager {
 
         /* ***************************  ROOMS ************************/
         BlocProvider(create: (BuildContext context) => sl<FetchRoomsBloc>()),
+        BlocProvider(create: (BuildContext context) => sl<AddTenantBloc>()),
       ],
       child: child,
     );

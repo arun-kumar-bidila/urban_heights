@@ -1,3 +1,4 @@
+import Room from "../../models/room.model.ts";
 import Tenant from "../../models/tenant.model.ts";
 import AppError from "../../utils/appError.ts";
 
@@ -20,6 +21,16 @@ export const createTenant = async ({
 
   if (isExisting) {
     throw new AppError("Tenant Already Exists in this Room", 400);
+  }
+
+  const room = await Room.findByIdAndUpdate(
+    roomId,
+    { vacant: false },
+    { new: true },
+  );
+
+  if (!room) {
+    throw new AppError("Room Id doesn't exist", 400);
   }
   const response = await Tenant.create({
     fullName,
