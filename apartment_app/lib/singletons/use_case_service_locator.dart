@@ -4,6 +4,7 @@ import 'package:apartment_app/features/announcements/domain/use_case/update_anno
 
 import 'package:apartment_app/features/auth/domain/use_case/fetch_apartment_use_case.dart';
 import 'package:apartment_app/features/auth/domain/use_case/login_apartment_use_case.dart';
+import 'package:apartment_app/features/rooms/domain/use_case/fetch_rooms_use_case.dart';
 import 'package:get_it/get_it.dart';
 
 Future<void> initUseCase({required GetIt sl}) async {
@@ -25,5 +26,10 @@ Future<void> initUseCase({required GetIt sl}) async {
   );
   sl.registerFactory<UpdateAnnouncementUseCase>(
     () => UpdateAnnouncementUseCase(announcementRepository: sl()),
+  );
+
+  // /* ***************************  ROOMS ************************/
+  sl.registerFactory<FetchRoomsUseCase>(
+    () => FetchRoomsUseCase(roomRepository: sl()),
   );
 }
