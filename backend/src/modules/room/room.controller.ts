@@ -2,7 +2,7 @@ import type { AuthRequest } from "../../middlewares/auth.middleware.ts";
 
 import type { Response } from "express";
 import { catchAsync } from "../../utils/catchAsync.ts";
-import { createRoom, fetchRooms } from "./room.service.ts";
+import { createRoom, fetchRooms, roomSummary } from "./room.service.ts";
 import { sendResponse } from "../../utils/sendResponse.ts";
 
 export const createRoomController = catchAsync(
@@ -35,6 +35,22 @@ export const fetchRoomsController = catchAsync(
       statusCode: 200,
       message: response.message,
       data: response.rooms,
+    });
+  },
+);
+
+export const roomSummaryController = catchAsync(
+  async (req: AuthRequest, res: Response) => {
+    const apartmentId = req.userId as string;
+
+    const response = await roomSummary(apartmentId);
+
+    sendResponse(res, {
+      statusCode: 200,
+      message: response.message,
+      data: {
+        summary: response.summary,
+      },
     });
   },
 );

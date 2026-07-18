@@ -1,5 +1,6 @@
 import 'package:apartment_app/core/failure.dart';
 import 'package:apartment_app/features/rooms/data/model/room_model.dart';
+import 'package:apartment_app/features/rooms/data/model/room_summary_model.dart';
 import 'package:apartment_app/features/rooms/data/remote/room_data_source.dart';
 import 'package:apartment_app/features/rooms/domain/repository/room_repository.dart';
 import 'package:apartment_app/features/rooms/domain/use_case/add_room_use_case.dart';
@@ -37,6 +38,16 @@ class RoomRepositoryImpl implements RoomRepository {
     required AddRoomUseCaseParams params,
   }) async {
     final response = await roomDataSource.addRoom(params: params);
+
+    return response.fold(
+      (failure) => Left(failure),
+      (success) => Right(success),
+    );
+  }
+
+  @override
+  Future<Either<Failure, RoomSummaryModel>> fetchRoomSummary() async {
+    final response = await roomDataSource.fetchRoomSummary();
 
     return response.fold(
       (failure) => Left(failure),

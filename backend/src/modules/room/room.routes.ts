@@ -6,6 +6,7 @@ import { authMiddleware } from "../../middlewares/auth.middleware.ts";
 import {
   createRoomController,
   fetchRoomsController,
+  roomSummaryController,
 } from "./room.controller.ts";
 
 const router = Router();
@@ -17,6 +18,8 @@ router.post(
   createRoomController,
 );
 router.get("/fetch", authMiddleware, fetchRoomsController);
+
+router.get("/summary", authMiddleware, roomSummaryController);
 
 const roomRouter = router;
 

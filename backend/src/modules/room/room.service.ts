@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import Room from "../../models/room.model.ts";
 import AppError from "../../utils/appError.ts";
 import Tenant from "../../models/tenant.model.ts";
+import Apartment from "../../models/apartment.model.ts";
 
 export interface CreateRoomRequest {
   roomNumber: string;
@@ -27,6 +28,12 @@ export interface SafeRoom {
   vacant: boolean;
   apartmentId: mongoose.Types.ObjectId;
   tenant: SafeTenant | null;
+}
+
+export interface RoomSummary {
+  totalRooms: number;
+  vacantRooms: number;
+  occupiedRooms: number;
 }
 
 export const createRoom = async ({
@@ -89,5 +96,30 @@ export const fetchRooms = async (
           : null,
       };
     }),
+  };
+};
+
+export const roomSummary = async (
+  apartmentId: string,
+): Promise<{ message: string; summary: RoomSummary }> => {
+  const totalRooms = await Room.countDocuments({ apartmentId });
+
+  const vacantRooms = await Room.countDocuments({
+    apartmentId,
+    vacant: true,
+  });
+
+  const occupiedRooms = await Room.countDocuments({
+    apartmentId,
+    vacant: false,
+  });
+
+  return {
+    message: "Room summary fetched successfully",
+    summary: {
+      totalRooms,
+      vacantRooms,
+      occupiedRooms,
+    },
   };
 };

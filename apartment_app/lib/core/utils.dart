@@ -36,3 +36,7 @@ String formatRent(num amount) {
 
   return formatter.format(amount);
 }
+
+String formatNumber(int number) {
+  return number.toString().padLeft(2, "0");
+}

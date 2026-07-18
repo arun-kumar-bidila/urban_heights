@@ -1,5 +1,7 @@
 import 'package:apartment_app/config/theme/app_colors.dart';
+import 'package:apartment_app/features/rooms/presentation/bloc/room_summary/room_summary_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DashboardHeader extends StatefulWidget {
   const DashboardHeader({super.key});
@@ -9,6 +11,12 @@ class DashboardHeader extends StatefulWidget {
 }
 
 class _DashboardHeaderState extends State<DashboardHeader> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<RoomSummaryBloc>().add(RoomSummary());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -85,27 +93,40 @@ class _DashboardHeaderState extends State<DashboardHeader> {
           ),
         ),
         IntrinsicHeight(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _buildHeaderFeature(
-                value: "8",
-                valueColor: AppColors.black,
-                desc: "Occupied of 9",
-              ),
-              SizedBox(width: 16),
-              _buildHeaderFeature(
-                value: "8",
-                valueColor: AppColors.red,
-                desc: "Overdue Rooms",
-              ),
-              SizedBox(width: 16),
-              _buildHeaderFeature(
-                value: "8",
-                valueColor: AppColors.red,
-                desc: "Open Issues complaints",
-              ),
-            ],
+          child: BlocBuilder<RoomSummaryBloc, RoomSummaryState>(
+            builder: (context, state) {
+              if (state is RoomSummaryLoading) {
+                return SizedBox(
+                  height: 30,
+                  child: CircularProgressIndicator(color: AppColors.stealBlue),
+                );
+              } else if (state is RoomSummarySuccess) {
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    _buildHeaderFeature(
+                      value: state.roomSummary.occupiedRooms.toString(),
+                      valueColor: AppColors.black,
+                      desc: "Occupied of ${state.roomSummary.totalRooms}",
+                    ),
+
+                    SizedBox(width: 16),
+                    _buildHeaderFeature(
+                      value: "8",
+                      valueColor: AppColors.red,
+                      desc: "Overdue Rooms",
+                    ),
+                    SizedBox(width: 16),
+                    _buildHeaderFeature(
+                      value: "8",
+                      valueColor: AppColors.red,
+                      desc: "Open Issues complaints",
+                    ),
+                  ],
+                );
+              }
+              return SizedBox.shrink();
+            },
           ),
         ),
       ],
