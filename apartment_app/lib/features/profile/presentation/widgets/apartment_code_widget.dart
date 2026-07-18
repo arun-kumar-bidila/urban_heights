@@ -2,7 +2,9 @@ import 'package:apartment_app/config/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ApartmentCodeWidget extends StatelessWidget {
-  const ApartmentCodeWidget({super.key});
+  final String apartmentCode;
+
+  const ApartmentCodeWidget({super.key, required this.apartmentCode});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class ApartmentCodeWidget extends StatelessWidget {
                   ),
                   SizedBox(height: 4),
                   Text(
-                    "URB-10234",
+                    apartmentCode,
                     style: TextStyle(
                       fontSize: 16,
                       color: AppColors.emerald,

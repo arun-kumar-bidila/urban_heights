@@ -16,7 +16,7 @@ export interface CreateApartmentRequest {
 }
 
 export interface LoginApartmentRequest {
-  apartmentId: string;
+  apartmentCode: string;
   password: string;
 }
 
@@ -74,20 +74,22 @@ export const createApartment = async ({
 };
 
 export const loginApartment = async ({
-  apartmentId,
+  apartmentCode,
   password,
 }: LoginApartmentRequest): Promise<{ message: string; token: string }> => {
-  const apartment = await Apartment.findOne({ apartmentId });
+  const apartment = await Apartment.findOne({ apartmentCode });
 
   if (!apartment) {
     throw new AppError("Apartment doesn't exist", 400);
   }
 
-  const isMatch = bcrypt.compare(password, apartment.password);
+  const isMatch = await bcrypt.compare(password, apartment.password);
   if (!isMatch) {
     throw new AppError("Invalid Apartment Credentials", 400);
   }
   const token = jwt.sign({ userId: apartment._id }, "secretKey");
+  console.log("Apartment Name:", apartment.apartmentName);
+  console.log("Token", token);
 
   return {
     message: "Apartment Login Success",

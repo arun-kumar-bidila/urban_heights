@@ -43,9 +43,9 @@ export const createApartmentController = catchAsync(
 
 export const loginApartmentController = catchAsync(
   async (req: Request, res: Response) => {
-    const { apartmentId, password } = req.body;
+    const { apartmentCode, password } = req.body;
     const result = await loginApartment({
-      apartmentId,
+      apartmentCode,
       password,
     });
 

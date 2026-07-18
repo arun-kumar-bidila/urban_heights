@@ -40,6 +40,7 @@ class AuthDataSourceImpl implements AuthDataSource {
           key: "token",
           value: response.data["data"]["token"],
         );
+
         return Right(true);
       } else {
         return Left(Failure());

@@ -35,69 +35,88 @@ class _ProfileScreenState extends State<ProfileScreen> {
       drawer: CustomNavigationDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          spacing: 20,
-          children: [
-            ProfileHeader(),
-            ApartmentCodeWidget(),
-            OwnerInfo(),
-            Container(
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.black,
-                    blurRadius: 1.5,
-                    spreadRadius: -1,
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: BlocBuilder<FetchApartmentBloc, FetchApartmentState>(
+          builder: (context, state) {
+            if (state is FetchApartmentLoading) {
+              return Center(
+                child: CircularProgressIndicator(color: AppColors.stealBlue),
+              );
+            } else if (state is FetchApartmentFailure) {
+              return SizedBox.shrink();
+            } else if (state is FetchApartmentSuccess) {
+              return Column(
+                spacing: 20,
                 children: [
-                  Column(
-                    crossAxisAlignment: .start,
-                    children: [
-                      Text(
-                        "Sign Out",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.red,
-                        ),
-                      ),
-
-                      Text(
-                        "Log Out of this device",
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.red,
-                        ),
-                      ),
-                    ],
+                  ProfileHeader(),
+                  ApartmentCodeWidget(
+                    apartmentCode: state.apartmentEntity.apartmentCode,
                   ),
-                  GestureDetector(
-                    onTap: () async {
-                      final storage = sl<FlutterSecureStorage>();
+                  OwnerInfo(),
+                  Container(
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.black,
+                          blurRadius: 1.5,
+                          spreadRadius: -1,
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: .start,
+                          children: [
+                            Text(
+                              "Sign Out",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.red,
+                              ),
+                            ),
 
-                      await storage.delete(key: "token");
+                            Text(
+                              "Log Out of this device",
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.red,
+                              ),
+                            ),
+                          ],
+                        ),
+                        GestureDetector(
+                          onTap: () async {
+                            final storage = sl<FlutterSecureStorage>();
 
-                      if (context.mounted) {
-                        context.read<FetchApartmentBloc>().add(
-                          ResetApartmentBlocEvent(),
-                        );
-                        context.go(AppRoutes.login);
-                      }
-                    },
-                    child: Icon(Icons.logout, size: 24, color: AppColors.red),
+                            await storage.delete(key: "token");
+
+                            if (context.mounted) {
+                              context.read<FetchApartmentBloc>().add(
+                                ResetApartmentBlocEvent(),
+                              );
+                              context.go(AppRoutes.login);
+                            }
+                          },
+                          child: Icon(
+                            Icons.logout,
+                            size: 24,
+                            color: AppColors.red,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
-              ),
-            ),
-          ],
+              );
+            }
+            return SizedBox.shrink();
+          },
         ),
       ),
     );
