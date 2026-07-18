@@ -3,6 +3,7 @@ import 'package:apartment_app/features/announcements/presentation/bloc/fetch_ann
 import 'package:apartment_app/features/announcements/presentation/bloc/update_announcement/update_announcement_bloc.dart';
 import 'package:apartment_app/features/auth/presentation/bloc/fetch_apartment/fetch_apartment_bloc.dart';
 import 'package:apartment_app/features/auth/presentation/bloc/login_apartment/login_apartment_bloc.dart';
+import 'package:apartment_app/features/rooms/presentation/bloc/add_room/add_room_bloc.dart';
 import 'package:apartment_app/features/rooms/presentation/bloc/add_tenant/add_tenant_bloc.dart';
 import 'package:apartment_app/features/rooms/presentation/bloc/fetch_rooms/fetch_rooms_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -33,4 +34,5 @@ Future<void> initBlocService({required GetIt sl}) async {
   sl.registerFactory<AddTenantBloc>(
     () => AddTenantBloc(addTenantUseCase: sl()),
   );
+  sl.registerFactory<AddRoomBloc>(() => AddRoomBloc(addRoomUseCase: sl()));
 }

@@ -2,7 +2,7 @@ import Apartment from "../../models/apartment.model.ts";
 import bcrypt from "bcrypt";
 import AppError from "../../utils/appError.ts";
 import jwt from "jsonwebtoken";
-import { generateApartmentCode } from "../../utils/generateApartementCode.ts";
+import { generateApartmentCode } from "../../utils/generateApartmentCode.ts";
 import { generateOwnerCode } from "../../utils/generateOwnerCode.ts";
 import Owner from "../../models/owner.model.ts";
 

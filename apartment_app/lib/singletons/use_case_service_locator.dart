@@ -4,8 +4,10 @@ import 'package:apartment_app/features/announcements/domain/use_case/update_anno
 
 import 'package:apartment_app/features/auth/domain/use_case/fetch_apartment_use_case.dart';
 import 'package:apartment_app/features/auth/domain/use_case/login_apartment_use_case.dart';
+import 'package:apartment_app/features/rooms/domain/use_case/add_room_use_case.dart';
 import 'package:apartment_app/features/rooms/domain/use_case/add_tenant_use_case.dart';
 import 'package:apartment_app/features/rooms/domain/use_case/fetch_rooms_use_case.dart';
+
 import 'package:get_it/get_it.dart';
 
 Future<void> initUseCase({required GetIt sl}) async {
@@ -35,5 +37,8 @@ Future<void> initUseCase({required GetIt sl}) async {
   );
   sl.registerFactory<AddTenantUseCase>(
     () => AddTenantUseCase(roomRepository: sl()),
+  );
+  sl.registerFactory<AddRoomUseCase>(
+    () => AddRoomUseCase(roomRepository: sl()),
   );
 }
