@@ -11,6 +11,19 @@ export const createComplaintSchema = Joi.object({
     "string.empty": "description is required",
     "any.required": "description is required",
   }),
+  roomNumber: Joi.string().trim().required().messages({
+    "string.empty": "roomNumber is required",
+    "any.required": "roomNumber is required",
+  }),
+  tenantName: Joi.string().trim().required().messages({
+    "string.empty": "tenantName is required",
+    "any.required": "tenantName is required",
+  }),
+  tenantMobile: Joi.string().trim().min(10).required().messages({
+    "string.min": "tenantMobile must be at least 10 characters",
+    "string.empty": "tenantMobile is required",
+    "any.required": "tenantMobile is required",
+  }),
   roomId: Joi.string().trim().required().messages({
     "string.empty": "roomId is required",
     "any.required": "roomId is required",

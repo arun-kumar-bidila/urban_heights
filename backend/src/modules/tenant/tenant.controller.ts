@@ -7,7 +7,15 @@ import bcrypt from "bcrypt";
 
 export const createTenantController = catchAsync(
   async (req: AuthRequest, res: Response) => {
-    const { fullName, mobile, email, roomId } = req.body;
+    const {
+      fullName,
+      mobile,
+      email,
+      roomNumber,
+      roomType,
+      apartmentName,
+      roomId,
+    } = req.body;
 
     const apartmentId = req.userId as string;
 
@@ -20,6 +28,9 @@ export const createTenantController = catchAsync(
       mobile,
       email,
       password: hashedPassword,
+      roomNumber,
+      roomType,
+      apartmentName,
       roomId,
       apartmentId,
     });

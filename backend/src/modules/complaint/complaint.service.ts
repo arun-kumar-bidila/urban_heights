@@ -1,17 +1,35 @@
+import type mongoose from "mongoose";
 import Complaint from "../../models/complaint.model.ts";
 import AppError from "../../utils/appError.ts";
 
 export interface CreateComplaintRequest {
   title: string;
   description: string;
+  roomNumber: string;
+  tenantName: string;
+  tenantMobile: string;
   tenantId: string;
   roomId: string;
   apartmentId: string;
 }
 
+export interface SafeComplaint {
+  id: mongoose.Types.ObjectId;
+  title: string;
+  description: string;
+  roomNumber: string;
+  status: string;
+  tenantName: string;
+  tenantMobile: string;
+  createdAt: Date;
+}
+
 export const createComplaint = async ({
   title,
   description,
+  roomNumber,
+  tenantName,
+  tenantMobile,
   tenantId,
   roomId,
   apartmentId,
@@ -19,6 +37,9 @@ export const createComplaint = async ({
   const response = await Complaint.create({
     title,
     description,
+    roomNumber,
+    tenantName,
+    tenantMobile,
     tenantId,
     roomId,
     apartmentId,
@@ -30,5 +51,27 @@ export const createComplaint = async ({
 
   return {
     message: "Complaint created successfully",
+  };
+};
+
+export const fetchComplaintsByApartment = async (
+  apartmentId: string,
+): Promise<{ message: string; data: SafeComplaint[] }> => {
+  const complaints = await Complaint.find({ apartmentId });
+
+  return {
+    message: "Apartment Complaints Fetched Successfully",
+    data: complaints.map((complaint) => {
+      return {
+        id: complaint._id,
+        title: complaint.title,
+        description: complaint.description,
+        roomNumber: complaint.roomNumber,
+        status: complaint.status,
+        tenantName: complaint.tenantName,
+        tenantMobile: complaint.tenantMobile,
+        createdAt: complaint.createdAt,
+      };
+    }),
   };
 };

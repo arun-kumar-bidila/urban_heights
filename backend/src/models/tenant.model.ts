@@ -9,7 +9,10 @@ export interface ITenant {
   mobile: string;
   email: string;
   password: string;
+  roomNumber: string;
+  roomType: string;
   roomId: mongoose.Types.ObjectId;
+  apartmentName: string;
   apartmentId: mongoose.Types.ObjectId;
   members: IMember[];
   createdAt: string;
@@ -50,6 +53,21 @@ const tenantSchema: Schema<ITenant> = new Schema(
       trim: true,
     },
     password: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    roomNumber: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    roomType: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    apartmentName: {
       type: String,
       required: true,
       trim: true,

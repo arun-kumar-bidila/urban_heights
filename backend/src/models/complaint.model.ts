@@ -4,6 +4,9 @@ export interface IComplaint extends Document {
   title: string;
   description: string;
   status: string;
+  roomNumber: string;
+  tenantName: string;
+  tenantMobile: string;
   tenantId: mongoose.Types.ObjectId;
   roomId: mongoose.Types.ObjectId;
   apartmentId: mongoose.Types.ObjectId;
@@ -26,6 +29,21 @@ const complaintSchema: Schema<IComplaint> = new Schema(
     status: {
       type: String,
       default: "open",
+    },
+    roomNumber: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    tenantName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    tenantMobile: {
+      type: String,
+      required: true,
+      trim: true,
     },
     tenantId: {
       type: mongoose.Schema.Types.ObjectId,

@@ -9,7 +9,10 @@ export interface CreateTenantRequest {
   mobile: string;
   email: string;
   password: string;
+  roomNumber: string;
+  roomType: string;
   roomId: string;
+  apartmentName: string;
   apartmentId: string;
 }
 
@@ -23,6 +26,9 @@ export const createTenant = async ({
   mobile,
   email,
   password,
+  roomNumber,
+  roomType,
+  apartmentName,
   roomId,
   apartmentId,
 }: CreateTenantRequest): Promise<{ message: string }> => {
@@ -46,6 +52,9 @@ export const createTenant = async ({
     mobile,
     email,
     password,
+    roomNumber,
+    roomType,
+    apartmentName,
     roomId,
     apartmentId,
   });
