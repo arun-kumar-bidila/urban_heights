@@ -4,6 +4,7 @@ import 'package:apartment_app/features/announcements/domain/use_case/update_anno
 
 import 'package:apartment_app/features/auth/domain/use_case/fetch_apartment_use_case.dart';
 import 'package:apartment_app/features/auth/domain/use_case/login_apartment_use_case.dart';
+import 'package:apartment_app/features/complaints/domain/use_case/fetch_complaints_use_case.dart';
 import 'package:apartment_app/features/rooms/domain/use_case/add_room_use_case.dart';
 import 'package:apartment_app/features/rooms/domain/use_case/add_tenant_use_case.dart';
 import 'package:apartment_app/features/rooms/domain/use_case/fetch_room_summary_use_case.dart';
@@ -44,5 +45,10 @@ Future<void> initUseCase({required GetIt sl}) async {
   );
   sl.registerFactory<FetchRoomSummaryUseCase>(
     () => FetchRoomSummaryUseCase(roomRepository: sl()),
+  );
+
+  // /* ***************************  COMPLAINTS ************************/
+  sl.registerFactory<FetchComplaintsUseCase>(
+    () => FetchComplaintsUseCase(complaintRepository: sl()),
   );
 }

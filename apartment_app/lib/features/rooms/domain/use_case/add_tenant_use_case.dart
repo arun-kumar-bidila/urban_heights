@@ -17,12 +17,18 @@ class AddTenantUseCaseParams {
   final String fullName;
   final String mobile;
   final String email;
+  final String roomNumber;
+  final String roomType;
+  final String apartmentName;
   final String roomId;
 
   AddTenantUseCaseParams({
     required this.fullName,
     required this.mobile,
     required this.email,
+    required this.roomNumber,
+    required this.roomType,
+    required this.apartmentName,
     required this.roomId,
   });
 }

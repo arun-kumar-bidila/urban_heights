@@ -1,6 +1,10 @@
 import 'package:apartment_app/config/theme/app_colors.dart';
+
+import 'package:apartment_app/core/utils.dart';
 import 'package:apartment_app/features/common/navigation_drawer.dart';
+import 'package:apartment_app/features/complaints/presentation/bloc/fetch_complaint/fetch_complaint_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ComplaintsScreen extends StatefulWidget {
   const ComplaintsScreen({super.key});
@@ -14,6 +18,12 @@ class _ComplaintsScreenState extends State<ComplaintsScreen> {
   String selectedType = "all";
   bool isSelected(String type) {
     return selectedType == type;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<FetchComplaintBloc>().add(FetchComplaint());
   }
 
   @override
@@ -75,120 +85,143 @@ class _ComplaintsScreenState extends State<ComplaintsScreen> {
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: 4,
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: EdgeInsets.all(16),
-                    margin: EdgeInsets.symmetric(vertical: 8),
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
-                      border: Border.all(width: 0.7, color: AppColors.grey),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: .start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.circle,
-                                  size: 8,
-                                  color: AppColors.mediumBlue,
-                                ),
-                                SizedBox(width: 10),
-                                Text(
-                                  "Electrical",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppColors.mediumBlue,
-                                  ),
-                                ),
-                                SizedBox(width: 8),
-                                Text(
-                                  "A-102",
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppColors.grey,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 15,
+              child: BlocBuilder<FetchComplaintBloc, FetchComplaintState>(
+                builder: (context, state) {
+                  if (state is FetchComplaintLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.stealBlue,
+                      ),
+                    );
+                  } else if (state is FetchComplaintFailure) {
+                    // Implement Failure widget
+                    return SizedBox.shrink();
+                  } else if (state is FetchComplaintSuccess) {
+                    final complaints = state.complaints;
+                    return ListView.builder(
+                      itemCount: complaints.length,
+                      itemBuilder: (context, index) {
+                        final complaint = complaints[index];
+                        return Container(
+                          padding: EdgeInsets.all(16),
+                          margin: EdgeInsets.symmetric(vertical: 8),
+                          decoration: BoxDecoration(
+                            color: AppColors.white,
+                            border: Border.all(
+                              width: 0.7,
                               color: AppColors.grey,
                             ),
-                          ],
-                        ),
-                        SizedBox(height: 6),
-                        Text(
-                          "Profile card at the top showing name + verified",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.black,
+                            borderRadius: BorderRadius.circular(16),
                           ),
-                        ),
-                        SizedBox(height: 12),
-                        Row(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                vertical: 4,
-                                horizontal: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                color: AppColors.paleRed,
-                              ),
-                              child: Row(
+                          child: Column(
+                            crossAxisAlignment: .start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Icon(
-                                    Icons.warning_amber_outlined,
-                                    size: 12,
-                                    color: AppColors.red,
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.circle,
+                                        size: 8,
+                                        color: AppColors.mediumBlue,
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        complaint.title.toUpperCase(),
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: AppColors.mediumBlue,
+                                        ),
+                                      ),
+                                      SizedBox(width: 8),
+                                      Text(
+                                        complaint.roomNumber.toUpperCase(),
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                          color: AppColors.grey,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  SizedBox(width: 4),
+                                  Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    size: 15,
+                                    color: AppColors.grey,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 6),
+                              Text(
+                                complaint.description,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.black,
+                                ),
+                              ),
+                              SizedBox(height: 12),
+                              Row(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 4,
+                                      horizontal: 8,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(16),
+                                      color: AppColors.paleRed,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.warning_amber_outlined,
+                                          size: 12,
+                                          color: AppColors.red,
+                                        ),
+                                        SizedBox(width: 4),
+                                        Text(
+                                          complaint.status,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600,
+                                            color: AppColors.red,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(width: 6),
                                   Text(
-                                    "open",
+                                    formattedDate(complaint.createdAt),
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w600,
-                                      color: AppColors.red,
+                                      color: AppColors.grey,
                                     ),
                                   ),
                                 ],
                               ),
-                            ),
-                            SizedBox(width: 6),
-                            Text(
-                              "02 July",
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.grey,
+                              SizedBox(height: 10),
+                              Text(
+                                "Tenant: ${complaint.tenantName} • +91 ${complaint.tenantMobile}",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.black,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          "Tenant: Arun Kumar • +91 79893 72523",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.black,
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                  );
+                        );
+                      },
+                    );
+                  }
+
+                  return SizedBox.shrink();
                 },
               ),
             ),

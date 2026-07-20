@@ -22,6 +22,9 @@ class AddTenantBloc extends Bloc<AddTenantEvent, AddTenantState> {
           mobile: event.addTenantUseCaseParams.mobile,
           email: event.addTenantUseCaseParams.email,
           roomId: event.addTenantUseCaseParams.roomId,
+          roomNumber: event.addTenantUseCaseParams.roomNumber,
+          roomType: event.addTenantUseCaseParams.roomType,
+          apartmentName: event.addTenantUseCaseParams.apartmentName,
         ),
       );
 
