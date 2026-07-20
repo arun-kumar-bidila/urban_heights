@@ -1,5 +1,4 @@
 import mongoose, { Schema, Model, Document } from "mongoose";
-import type { Mode } from "node:fs";
 
 export interface IMember {
   fullName: string;
@@ -9,6 +8,7 @@ export interface ITenant {
   fullName: string;
   mobile: string;
   email: string;
+  password: string;
   roomId: mongoose.Types.ObjectId;
   apartmentId: mongoose.Types.ObjectId;
   members: IMember[];
@@ -45,6 +45,11 @@ const tenantSchema: Schema<ITenant> = new Schema(
       trim: true,
     },
     email: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    password: {
       type: String,
       required: true,
       trim: true,

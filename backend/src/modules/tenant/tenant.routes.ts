@@ -1,8 +1,11 @@
 import { Router } from "express";
 import { validator } from "../../middlewares/validator.ts";
-import { createTenantSchema } from "./tenant.validation.ts";
+import { createTenantSchema, loginTenantSchema } from "./tenant.validation.ts";
 import { authMiddleware } from "../../middlewares/auth.middleware.ts";
-import { createTenantController } from "./tenant.controller.ts";
+import {
+  createTenantController,
+  loginTenantController,
+} from "./tenant.controller.ts";
 
 const router = Router();
 
@@ -12,6 +15,8 @@ router.post(
   authMiddleware,
   createTenantController,
 );
+
+router.post("/login", validator(loginTenantSchema), loginTenantController);
 
 const tenantRouter = router;
 

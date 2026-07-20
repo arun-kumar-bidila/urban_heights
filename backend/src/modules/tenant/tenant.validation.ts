@@ -18,3 +18,14 @@ export const createTenantSchema = Joi.object({
     "any.required": "roomId is required",
   }),
 }).strict();
+
+export const loginTenantSchema = Joi.object({
+  email: Joi.string().trim().required().messages({
+    "string.empty": "email is required",
+    "any.required": "email is required",
+  }),
+  password: Joi.string().trim().required().messages({
+    "string.empty": "password is required",
+    "any.required": "password is required",
+  }),
+}).strict();

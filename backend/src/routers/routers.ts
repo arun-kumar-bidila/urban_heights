@@ -4,6 +4,7 @@ import apartmentRouter from "../modules/apartment/apartment.auth.routes.ts";
 import announcementRouter from "../modules/announcements/announcements.routes.ts";
 import roomRouter from "../modules/room/room.routes.ts";
 import tenantRouter from "../modules/tenant/tenant.routes.ts";
+import complaintRouter from "../modules/complaint/complaint.routes.ts";
 
 const router = Router();
 
@@ -12,5 +13,6 @@ router.use("/apartment", apartmentRouter);
 router.use("/announcement", announcementRouter);
 router.use("/room", roomRouter);
 router.use("/tenant", tenantRouter);
+router.use("/complaint", complaintRouter);
 
 export default router;
