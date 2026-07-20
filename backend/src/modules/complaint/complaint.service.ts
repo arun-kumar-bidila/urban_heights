@@ -24,6 +24,11 @@ export interface SafeComplaint {
   createdAt: Date;
 }
 
+export interface UpdateComplaintRequest {
+  complaintId: string;
+  status: string;
+}
+
 export const createComplaint = async ({
   title,
   description,
@@ -73,5 +78,26 @@ export const fetchComplaintsByApartment = async (
         createdAt: complaint.createdAt,
       };
     }),
+  };
+};
+
+export const updateComplaintStatus = async ({
+  complaintId,
+  status,
+}: UpdateComplaintRequest): Promise<{ message: string }> => {
+  const response = await Complaint.findByIdAndUpdate(
+    complaintId,
+    {
+      status: status,
+    },
+    { new: true, runValidators: true },
+  );
+
+  if (!response) {
+    throw new AppError("Failed to update complaint", 400);
+  }
+
+  return {
+    message: "Complaint updated successfully",
   };
 };

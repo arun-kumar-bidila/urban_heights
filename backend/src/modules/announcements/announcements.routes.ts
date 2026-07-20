@@ -21,7 +21,7 @@ router.post(
 
 router.delete("/:announcementId", authMiddleware, deleteAnnouncementController);
 
-router.patch("/:announcementId", updateAnnouncementController);
+router.patch("/:announcementId", authMiddleware, updateAnnouncementController);
 
 const announcementRouter = router;
 

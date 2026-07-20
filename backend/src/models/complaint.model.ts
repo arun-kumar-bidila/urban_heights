@@ -1,9 +1,19 @@
 import mongoose, { Schema, Model, Document } from "mongoose";
 
+export const ComplaintStatus = {
+  OPEN: "open",
+  IN_PROGRESS: "in_progress",
+  RESOLVED: "resolved",
+  CLOSED: "closed",
+} as const;
+
+export type ComplaintStatus =
+  (typeof ComplaintStatus)[keyof typeof ComplaintStatus];
+
 export interface IComplaint extends Document {
   title: string;
   description: string;
-  status: string;
+  status: ComplaintStatus;
   roomNumber: string;
   tenantName: string;
   tenantMobile: string;
@@ -28,7 +38,8 @@ const complaintSchema: Schema<IComplaint> = new Schema(
     },
     status: {
       type: String,
-      default: "open",
+      enum: Object.values(ComplaintStatus),
+      default: ComplaintStatus.OPEN,
     },
     roomNumber: {
       type: String,

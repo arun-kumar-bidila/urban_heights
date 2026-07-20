@@ -5,6 +5,7 @@ import type { Response } from "express";
 import {
   createComplaint,
   fetchComplaintsByApartment,
+  updateComplaintStatus,
 } from "./complaint.service.ts";
 import { sendResponse } from "../../utils/sendResponse.ts";
 
@@ -49,6 +50,21 @@ export const fetchComplaintsByApartmentController = catchAsync(
       statusCode: 200,
       message: result.message,
       data: result.data,
+    });
+  },
+);
+
+export const updateComplaintStatusController = catchAsync(
+  async (req: AuthRequest, res: Response) => {
+    const complaintId = req.params.complaintId as string;
+
+    const { status } = req.body;
+
+    const result = await updateComplaintStatus({ complaintId, status });
+
+    sendResponse(res, {
+      statusCode: 200,
+      message: result.message,
     });
   },
 );

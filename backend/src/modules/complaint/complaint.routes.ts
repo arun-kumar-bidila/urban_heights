@@ -4,6 +4,7 @@ import { authMiddleware } from "../../middlewares/auth.middleware.ts";
 import {
   createComplaintController,
   fetchComplaintsByApartmentController,
+  updateComplaintStatusController,
 } from "./complaint.controller.ts";
 import { validator } from "../../middlewares/validator.ts";
 
@@ -17,6 +18,7 @@ router.post(
 );
 
 router.get("/fetch", authMiddleware, fetchComplaintsByApartmentController);
+router.patch("/:complaintId", authMiddleware, updateComplaintStatusController);
 
 const complaintRouter = router;
 
