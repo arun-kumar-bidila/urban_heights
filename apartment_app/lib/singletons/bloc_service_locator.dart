@@ -7,6 +7,7 @@ import 'package:apartment_app/features/complaints/presentation/bloc/fetch_compla
 import 'package:apartment_app/features/rooms/presentation/bloc/add_room/add_room_bloc.dart';
 import 'package:apartment_app/features/rooms/presentation/bloc/add_tenant/add_tenant_bloc.dart';
 import 'package:apartment_app/features/rooms/presentation/bloc/fetch_rooms/fetch_rooms_bloc.dart';
+import 'package:apartment_app/features/rooms/presentation/bloc/remove_tenant/remove_tenant_bloc.dart';
 import 'package:apartment_app/features/rooms/presentation/bloc/room_summary/room_summary_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -39,6 +40,9 @@ Future<void> initBlocService({required GetIt sl}) async {
   sl.registerFactory<AddRoomBloc>(() => AddRoomBloc(addRoomUseCase: sl()));
   sl.registerFactory<RoomSummaryBloc>(
     () => RoomSummaryBloc(fetchRoomSummaryUseCase: sl()),
+  );
+  sl.registerFactory<RemoveTenantBloc>(
+    () => RemoveTenantBloc(removeTenantUseCase: sl()),
   );
 
   /* ***************************  COMPLAINTS ************************/

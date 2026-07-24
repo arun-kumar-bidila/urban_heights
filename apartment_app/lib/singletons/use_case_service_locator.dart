@@ -9,6 +9,7 @@ import 'package:apartment_app/features/rooms/domain/use_case/add_room_use_case.d
 import 'package:apartment_app/features/rooms/domain/use_case/add_tenant_use_case.dart';
 import 'package:apartment_app/features/rooms/domain/use_case/fetch_room_summary_use_case.dart';
 import 'package:apartment_app/features/rooms/domain/use_case/fetch_rooms_use_case.dart';
+import 'package:apartment_app/features/rooms/domain/use_case/remove_tenant_use_case.dart';
 
 import 'package:get_it/get_it.dart';
 
@@ -45,6 +46,9 @@ Future<void> initUseCase({required GetIt sl}) async {
   );
   sl.registerFactory<FetchRoomSummaryUseCase>(
     () => FetchRoomSummaryUseCase(roomRepository: sl()),
+  );
+  sl.registerFactory<RemoveTenantUseCase>(
+    () => RemoveTenantUseCase(roomRepository: sl()),
   );
 
   // /* ***************************  COMPLAINTS ************************/

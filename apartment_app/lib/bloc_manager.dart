@@ -7,6 +7,7 @@ import 'package:apartment_app/features/complaints/presentation/bloc/fetch_compla
 import 'package:apartment_app/features/rooms/presentation/bloc/add_room/add_room_bloc.dart';
 import 'package:apartment_app/features/rooms/presentation/bloc/add_tenant/add_tenant_bloc.dart';
 import 'package:apartment_app/features/rooms/presentation/bloc/fetch_rooms/fetch_rooms_bloc.dart';
+import 'package:apartment_app/features/rooms/presentation/bloc/remove_tenant/remove_tenant_bloc.dart';
 import 'package:apartment_app/features/rooms/presentation/bloc/room_summary/room_summary_bloc.dart';
 import 'package:apartment_app/singletons/init_dependencies.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,7 @@ class BlocManager {
         BlocProvider(
           create: (BuildContext context) => sl<FetchComplaintBloc>(),
         ),
+        BlocProvider(create: (BuildContext context) => sl<RemoveTenantBloc>()),
       ],
       child: child,
     );
