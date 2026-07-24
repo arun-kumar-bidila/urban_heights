@@ -30,6 +30,11 @@ export interface ChangeRoomRequest {
   apartmentId: string;
 }
 
+export interface RemoveTenantRequest {
+  tenantId: string;
+  apartmentId: string;
+}
+
 export const createTenant = async ({
   fullName,
   mobile,
@@ -156,5 +161,52 @@ export const changeRoom = async ({
 
   return {
     message: "Room changed successfully",
+  };
+};
+
+export const removeTenant = async ({
+  tenantId,
+  apartmentId,
+}: RemoveTenantRequest): Promise<{ message: string }> => {
+  const tenant = await Tenant.findOne({
+    _id: tenantId,
+    apartmentId,
+  });
+
+  if (!tenant) {
+    throw new AppError("Tenant not found", 404);
+  }
+
+  const currentRoomId = tenant.roomId;
+
+  if (currentRoomId) {
+    const room = await Room.findOneAndUpdate(
+      {
+        _id: currentRoomId,
+        apartmentId,
+      },
+      {
+        vacant: true,
+      },
+      {
+        new: true,
+      },
+    );
+
+    if (!room) {
+      throw new AppError("Room not found", 404);
+    }
+  }
+
+  await Tenant.findByIdAndUpdate(tenantId, {
+    roomId: null,
+    roomNumber: null,
+    roomType: null,
+    apartmentId: null,
+    apartmentName: null,
+  });
+
+  return {
+    message: "Tenant removed successfully",
   };
 };

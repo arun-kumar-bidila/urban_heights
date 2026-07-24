@@ -4,12 +4,14 @@ import {
   changeRoomSchema,
   createTenantSchema,
   loginTenantSchema,
+  removeTenantSchema,
 } from "./tenant.validation.ts";
 import { authMiddleware } from "../../middlewares/auth.middleware.ts";
 import {
   changeRoomController,
   createTenantController,
   loginTenantController,
+  removeTenantController,
 } from "./tenant.controller.ts";
 import { changeRoom } from "./tenant.service.ts";
 
@@ -29,6 +31,13 @@ router.patch(
   validator(changeRoomSchema),
   authMiddleware,
   changeRoomController,
+);
+
+router.patch(
+  "/remove",
+  validator(removeTenantSchema),
+  authMiddleware,
+  removeTenantController,
 );
 
 const tenantRouter = router;

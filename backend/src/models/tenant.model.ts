@@ -9,11 +9,11 @@ export interface ITenant {
   mobile: string;
   email: string;
   password: string;
-  roomNumber: string;
-  roomType: string;
-  roomId: mongoose.Types.ObjectId;
-  apartmentName: string;
-  apartmentId: mongoose.Types.ObjectId;
+  roomNumber: string | null;
+  roomType: string | null;
+  roomId: mongoose.Types.ObjectId | null;
+  apartmentName: string | null;
+  apartmentId: mongoose.Types.ObjectId | null;
   members: IMember[];
   createdAt: string;
   updatedAt: string;

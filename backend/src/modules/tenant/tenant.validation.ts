@@ -64,3 +64,10 @@ export const changeRoomSchema = Joi.object({
     "any.required": "currentRoomId is required",
   }),
 });
+
+export const removeTenantSchema = Joi.object({
+  tenantId: Joi.string().trim().required().messages({
+    "string.empty": "tenantId is required",
+    "any.required": "tenantId is required",
+  }),
+});
