@@ -1,7 +1,7 @@
 import type { AuthRequest } from "../../middlewares/auth.middleware.ts";
 import { catchAsync } from "../../utils/catchAsync.ts";
 import { response, type Request, type Response } from "express";
-import { createTenant, loginTenant } from "./tenant.service.ts";
+import { changeRoom, createTenant, loginTenant } from "./tenant.service.ts";
 import { sendResponse } from "../../utils/sendResponse.ts";
 import bcrypt from "bcrypt";
 
@@ -54,6 +54,29 @@ export const loginTenantController = catchAsync(
       data: {
         token: result.token,
       },
+    });
+  },
+);
+
+export const changeRoomController = catchAsync(
+  async (req: AuthRequest, res: Response) => {
+    const { tenantId, currentRoomId, newRoomId, newRoomType, newRoomNumber } =
+      req.body;
+
+    const apartmentId = req.userId as string;
+
+    const result = await changeRoom({
+      tenantId,
+      currentRoomId,
+      newRoomId,
+      newRoomType,
+      newRoomNumber,
+      apartmentId,
+    });
+
+    sendResponse(res, {
+      statusCode: 200,
+      message: result.message,
     });
   },
 );

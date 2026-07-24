@@ -21,6 +21,15 @@ export interface LoginTenantRequest {
   password: string;
 }
 
+export interface ChangeRoomRequest {
+  tenantId: string;
+  currentRoomId: string;
+  newRoomId: string;
+  newRoomType: string;
+  newRoomNumber: string;
+  apartmentId: string;
+}
+
 export const createTenant = async ({
   fullName,
   mobile,
@@ -85,5 +94,67 @@ export const loginTenant = async ({
   return {
     message: "Tenant login successful",
     token: token,
+  };
+};
+
+export const changeRoom = async ({
+  tenantId,
+  currentRoomId,
+  newRoomId,
+  newRoomType,
+  newRoomNumber,
+  apartmentId,
+}: ChangeRoomRequest): Promise<{ message: string }> => {
+  const tenant = await Tenant.findOne({
+    _id: tenantId,
+    apartmentId,
+  });
+
+  if (!tenant) {
+    throw new AppError("Tenant not found", 404);
+  }
+
+  const currentRoom = await Room.findOne({
+    _id: currentRoomId,
+    apartmentId,
+  });
+
+  if (!currentRoom) {
+    throw new AppError("Current room not found", 404);
+  }
+
+  const newRoom = await Room.findOne({
+    _id: newRoomId,
+    apartmentId,
+  });
+
+  if (!newRoom) {
+    throw new AppError("New room not found", 404);
+  }
+
+  if (!newRoom.vacant) {
+    throw new AppError("New room is already occupied", 400);
+  }
+
+  await Tenant.findByIdAndUpdate(
+    tenantId,
+    {
+      roomId: newRoomId,
+      roomNumber: newRoomNumber,
+      roomType: newRoomType,
+    },
+    { new: true },
+  );
+
+  await Room.findByIdAndUpdate(currentRoomId, {
+    vacant: true,
+  });
+
+  await Room.findByIdAndUpdate(newRoomId, {
+    vacant: false,
+  });
+
+  return {
+    message: "Room changed successfully",
   };
 };

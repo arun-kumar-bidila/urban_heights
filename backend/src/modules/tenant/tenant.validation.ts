@@ -41,3 +41,26 @@ export const loginTenantSchema = Joi.object({
     "any.required": "password is required",
   }),
 }).strict();
+
+export const changeRoomSchema = Joi.object({
+  tenantId: Joi.string().trim().required().messages({
+    "string.empty": "tenantId is required",
+    "any.required": "tenantId is required",
+  }),
+  newRoomNumber: Joi.string().trim().required().messages({
+    "string.empty": "newRoomNumber is required",
+    "any.required": "newRoomNumber is required",
+  }),
+  newRoomType: Joi.string().trim().required().messages({
+    "string.empty": "newRoomType is required",
+    "any.required": "newRoomType is required",
+  }),
+  newRoomId: Joi.string().trim().required().messages({
+    "string.empty": "newRoomId is required",
+    "any.required": "newRoomId is required",
+  }),
+  currentRoomId: Joi.string().trim().required().messages({
+    "string.empty": "currentRoomId is required",
+    "any.required": "currentRoomId is required",
+  }),
+});
