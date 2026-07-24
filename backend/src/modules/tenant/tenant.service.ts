@@ -8,7 +8,7 @@ export interface CreateTenantRequest {
   fullName: string;
   mobile: string;
   email: string;
-  password: string;
+
   roomNumber: string;
   roomType: string;
   roomId: string;
@@ -39,33 +39,66 @@ export const createTenant = async ({
   fullName,
   mobile,
   email,
-  password,
   roomNumber,
   roomType,
   apartmentName,
   roomId,
   apartmentId,
 }: CreateTenantRequest): Promise<{ message: string }> => {
-  const isExisting = await Tenant.findOne({ roomId });
-
-  if (isExisting) {
-    throw new AppError("Tenant Already Exists in this Room", 400);
-  }
-
-  const room = await Room.findByIdAndUpdate(
-    roomId,
-    { vacant: false },
-    { new: true },
-  );
+  const room = await Room.findOne({
+    _id: roomId,
+    apartmentId,
+  });
 
   if (!room) {
-    throw new AppError("Room Id doesn't exist", 400);
+    throw new AppError("Room not found", 404);
   }
-  const response = await Tenant.create({
+
+  if (!room.vacant) {
+    throw new AppError("Tenant found in this room", 400);
+  }
+
+  const existingTenant = await Tenant.findOne({
+    mobile,
+  });
+
+  if (existingTenant) {
+    if (existingTenant.roomId == null && existingTenant.apartmentId == null) {
+      await Tenant.findByIdAndUpdate(
+        existingTenant._id,
+        {
+          roomId,
+          roomNumber,
+          roomType,
+          apartmentName,
+          apartmentId,
+        },
+        {
+          new: true,
+        },
+      );
+
+      await Room.findByIdAndUpdate(roomId, {
+        vacant: false,
+      });
+
+      return {
+        message: "Tenant assigned to room successfully",
+      };
+    }
+
+    throw new AppError("Tenant is already in another room", 400);
+  }
+
+  const password = mobile.slice(-6);
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  await Tenant.create({
     fullName,
     mobile,
     email,
-    password,
+    password: hashedPassword,
     roomNumber,
     roomType,
     apartmentName,
@@ -73,8 +106,12 @@ export const createTenant = async ({
     apartmentId,
   });
 
+  await Room.findByIdAndUpdate(roomId, {
+    vacant: false,
+  });
+
   return {
-    message: "Tenant Created Successfully",
+    message: "Tenant created successfully",
   };
 };
 

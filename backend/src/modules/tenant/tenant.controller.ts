@@ -24,15 +24,10 @@ export const createTenantController = catchAsync(
 
     const apartmentId = req.userId as string;
 
-    const password = mobile.slice(-6);
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
     const response = await createTenant({
       fullName,
       mobile,
       email,
-      password: hashedPassword,
       roomNumber,
       roomType,
       apartmentName,
